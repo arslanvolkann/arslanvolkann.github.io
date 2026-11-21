@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hakkımda — Volkan Arslan</title>
+<meta name="description" content="Volkan Arslan, mechanical design engineer: posts on mechanical design, precision engineering, GD&T and analysis, and browser-based engineering calculation tools.">
+<meta name="author" content="Volkan Arslan">
+<meta property="og:title" content="Hakkımda — Volkan Arslan">
+<meta property="og:description" content="Volkan Arslan, mechanical design engineer: posts on mechanical design, precision engineering, GD&T and analysis, and browser-based engineering calculation tools.">
+<meta property="og:type" content="profile">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
+<script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
+<script>try{var __t=localStorage.getItem("va-site-tema");if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__h=new Date().getHours();__v=__s==="day"||(__s!=="night"&&__h>=9&&__h<16&&!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches))}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=localStorage.getItem("athermal-bag-hesabi-v14-dil");document.documentElement.setAttribute("lang",__l==="tr"||__l==="de"?__l:"en")}catch(e){document.documentElement.setAttribute("lang","en")}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div id="app" class="site" data-page="about">
+  <a class="skip" href="#main">İçeriğe geç</a>
+  <header class="top">
+    <div class="wrap">
+      <div class="row1">
+        <div>
+          <h1><a class="brand" href="index.html" translate="no"><span class="mono" aria-hidden="true">VA</span>Volkan Arslan</a></h1>
+        </div>
+        <div class="hdrR">
+          <div class="themebox langbox" translate="no">
+            <button type="button" class="themebtn langbtn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Language / Dil: English">EN</button>
+            <div class="thememenu langmenu" id="langMenu" role="radiogroup" aria-label="Language / Dil" hidden>
+              <button type="button" role="radio" aria-checked="true" data-lang-opt="en" lang="en">English</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="de" lang="de">Deutsch</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="tr" lang="tr">Türkçe</button>
+            </div>
+          </div>
+          <div class="themebox">
+            <button type="button" class="themebtn" id="themeBtn" aria-haspopup="true" aria-expanded="false" aria-controls="themePop" aria-label="Tema: Sistem"><span id="themeIco" aria-hidden="true"></span></button>
+            <div class="thememenu" id="themePop" hidden>
+              <div id="themeMenu" role="radiogroup" aria-label="Tema">
+                <button type="button" role="radio" aria-checked="true" data-theme-opt="system">Sistem</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="light">Açık</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="dark">Koyu</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="holiday">Yılbaşı</button>
+              </div>
+              <div id="holMenuX" class="thx" hidden>
+                <button type="button" id="holRunBtn" aria-pressed="true">Karı durdur</button>
+                <button type="button" id="holSetBtn" aria-haspopup="dialog">Yılbaşı efektleri…</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="tabs sitenav" aria-label="Site">
+        <a href="index.html" data-nav="home">Yazılar</a>
+        <a href="tools.html" data-nav="tools">Hesaplama araçları</a>
+        <a href="about.html" data-nav="about">Hakkımda</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap site-main" id="main">
+    <div role="tabpanel" id="sitePane" aria-label="İçerik">
+      <section class="card hero" aria-labelledby="heroName">
+        <div class="hero-id">
+          <img class="avatar" src="assets/avatar.jpg" alt="Volkan Arslan" width="240" height="240">
+          <div>
+            <p class="hero-name" id="heroName" translate="no">Volkan Arslan</p>
+            <p class="hero-role">Mekanik Tasarım Mühendisi</p>
+            <p class="hero-meta"><span>Mekanik tasarım, hassas mühendislik ve lazer sistemleri</span> · <span>Ankara, Türkiye</span></p>
+          </div>
+        </div>
+        <p class="lead">Mekanik sistemleri kavramdan prototipe kadar tasarlıyorum: 3B CAD, teknik resim ve GD&amp;T, mühendislik hesapları, ANSYS ile yapısal ve ısıl analiz, üretim koordinasyonu ve temiz oda montajı. Çalışma alanım lazer sistemleri ve bunların opto-mekaniği.</p>
+        <div class="btnrow hero-btns">
+          <a class="btn pri" href="index.html">Yazıları gör</a>
+          <a class="btn" href="#contact">İletişim</a>
+          <a class="btn" href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </section>
+
+      <section class="card" id="about" aria-labelledby="h-about">
+        <h2 id="h-about">Hakkımda</h2>
+        <p>ASELSAN'da mekanik sistemlerin ve mühendislik ürünlerinin tasarımında ve geliştirilmesinde 3 yılı aşkın Ar-Ge deneyimi olan bir mekanik tasarım mühendisiyim. Kavram geliştirme ve 3B CAD modellemeden ayrıntılı mühendisliğe, teknik dokümantasyona, üretime ve prototip testine kadar ürün geliştirme sürecinin tamamında çalışıyorum.</p>
+        <p>Mekanik ve opto-mekanik tasarım, hassas mühendislik, athermalizasyon tasarımı, teknik resim, GD&amp;T, mühendislik el hesapları, yapısal ve temel ısıl analiz ile ANSYS Workbench simülasyonu alanlarında deneyimliyim. Karmaşık mühendislik problemlerine güvenilir, üretilebilir ve performans odaklı çözümler geliştirmek için çok disiplinli ekiplerle birlikte çalışıyorum.</p>
+        <p>Kariyerimden önce beş yıl boyunca ODTÜ MECH atölyesinin aktif bir üyesiydim: hızlı çizgi izleyen robotlardan quadcopter'lara kadar robotik projeler geliştirdim ve Fener Otonom Araç Projesi'nde yer aldım. Buradan edindiğim CNC işleme, PCB üretimi ve 3B baskı deneyimi bugün de üretime uygun tasarım bakışımı şekillendiriyor.</p>
+      </section>
+
+      <section class="card" id="experience" aria-labelledby="h-exp">
+        <h2 id="h-exp">Deneyim</h2>
+        <ol class="tl">
+          <li>
+            <div class="tl-h"><h3>Lazer Sistemleri Mekanik Tasarım Mühendisi</h3><span class="tl-d">Eylül 2023 – günümüz</span></div>
+            <p class="tl-o"><b translate="no">ASELSAN</b> · <span>Ankara, Türkiye</span></p>
+            <p>Ar-Ge tasarım mühendisi olarak çalışıyorum. İşim opto-mekanik tutucuların tasarımından elde taşınan ya da entegre son sistemlerin geliştirilmesine kadar uzanıyor. Tasarladığım parçaların teknik resimlerini hazırlıyor, ölçülendirme ve toleranslandırmayı ASME Y14.5-2018'e göre yapıyor, parçaların üretimi için tedarikçilerle koordinasyon kuruyor ve temiz oda ortamında (ISO Sınıf 6) montaj ve entegrasyon dahil ilk çalışan prototipleri oluşturuyorum.</p>
+            <ul>
+              <li>Çeşitli optiklerin opto-mekanik tasarımı</li>
+              <li>Lazer mesafe ölçerlerin, lazer işaretleyicilerin ve yüksek güçlü yönlendirilmiş enerji sistemlerinin mekanik tasarımı</li>
+              <li>ANSYS Workbench ile yapısal simülasyonlar (Explicit Dynamics, Transient Structural, Static Structural, modal ve temel ısıl analiz)</li>
+              <li>Şok testlerinin (ör. MIL-STD-810G) simülasyonu ve opto-mekanik sistemlerin yapısal bütünlüğünün analizi</li>
+              <li>İlk prototiplerin test edilmesi ve sorunların çözülmesi</li>
+              <li>Generative design ile mekanik sistem tasarımlarının optimizasyonu</li>
+              <li>Mekanik Gereksinim Spesifikasyonu ve Mekanik Tasarım Tanımı belgelerinin yazılması</li>
+            </ul>
+          </li>
+          <li>
+            <div class="tl-h"><h3>Stajyer</h3><span class="tl-d">Temmuz 2023</span></div>
+            <p class="tl-o"><b translate="no">Eptisa Türkiye</b> · <span>Ankara, Türkiye</span></p>
+            <p>Bir mühendislik danışmanlık ofisinde dört haftalık zorunlu staj; süren projelere veri analizi ve müşteri iletişimi görevleriyle katkı.</p>
+          </li>
+          <li>
+            <div class="tl-h"><h3>Stajyer, Piroteknik Sistemler</h3><span class="tl-d">Ağustos – Eylül 2022</span></div>
+            <p class="tl-o"><b translate="no">Roketsan</b> · <span>Ankara, Türkiye</span></p>
+            <p>Piroteknik Operasyonlar Bölümü'nde zorunlu staj. Şirket genelindeki üretim süreçlerini yerinde gördüm; üretim yöntemlerini, kalite kontrolü ve patlayıcı ve hassas malzemelerle çalışmanın gerektirdiği güvenlik prosedürlerini öğrendim.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="card" id="skills" aria-labelledby="h-skills">
+        <h2 id="h-skills">Yetenekler</h2>
+        <div class="skills">
+          <div class="sk"><h3>CAD ve PLM</h3><ul class="chips" translate="no"><li>PTC Creo</li><li>Siemens NX</li><li>Fusion 360</li><li>Windchill PLM</li><li>SAP R3</li></ul></div>
+          <div class="sk"><h3>Analiz ve hesap</h3><ul class="chips" translate="no"><li>ANSYS Workbench</li><li>MATLAB</li><li>Mathcad</li></ul></div>
+          <div class="sk"><h3>Standartlar ve tasarım</h3><ul class="chips"><li translate="no">ASME Y14.5-2018</li><li translate="no">MIL-STD-810G</li><li>Opto-mekanik sistem tasarımı</li><li>Athermalizasyon tasarımı</li></ul></div>
+          <div class="sk"><h3>Programlama ve elektronik</h3><ul class="chips"><li translate="no">C</li><li translate="no">Python</li><li translate="no">Arduino</li><li>EasyEDA ve FlatCAM ile PCB tasarımı ve üretimi</li></ul></div>
+          <div class="sk"><h3>Üretim ve prototipleme</h3><ul class="chips"><li translate="no">Mach3 CNC</li><li translate="no">Fusion 360 CAM</li><li>3B baskı (Cura, Prusa, Bambu Studio)</li><li>Temiz oda montajı (ISO Sınıf 6)</li></ul></div>
+          <div class="sk"><h3>Diller</h3><ul class="chips"><li>Türkçe: ana dil</li><li>İngilizce: C1–C2</li></ul></div>
+        </div>
+      </section>
+
+      <section class="card" id="education" aria-labelledby="h-edu">
+        <h2 id="h-edu">Eğitim ve sertifikalar</h2>
+        <ol class="tl">
+          <li>
+            <div class="tl-h"><h3>Makine Mühendisliği Lisans</h3><span class="tl-d">2018 – 2023</span></div>
+            <p class="tl-o"><b>Orta Doğu Teknik Üniversitesi (ODTÜ)</b> · <span>Ankara, Türkiye</span></p>
+            <p>Bölüm sıralaması: 77/377 (2022–2023)</p>
+            <p>Temel makine mühendisliği derslerine ek olarak hidrolik sistemler, bütünleşik üretim sistemleri, mühendislik metrolojisi ve kalite kontrol, proje yönetimi ve mühendislik ekonomisi seçmelileri aldım. Proje yönetimi dersinde bir ürünü kavramdan kapsamlı bir iş raporuna kadar geliştirdim.</p>
+            <p>Beş yıl boyunca öğrenci yönetimindeki ODTÜ MECH atölyesinde çizgi izleyen robotlar, PID kontrollü dengeleyen robotlar, quadcopter'lar, robot kol, CNC tezgâh onarımı ve CNC'de çift taraflı PCB tasarımı ve üretimi gibi projeler yaptım. Üniversite destekli Fener Otonom Araç Projesi'ne katıldım.</p>
+          </li>
+          <li>
+            <div class="tl-h"><h3>Opto-Mekanik Sistem Tasarımı</h3><span class="tl-d">Mart 2026</span></div>
+            <p class="tl-o"><b>DSPE (Hollanda Hassas Mühendislik Derneği)</b> · <span>Eindhoven, Hollanda</span></p>
+            <p>Yüksek hassasiyetli optik sistemler için ileri opto-mekanik tasarım ilkeleri, ısıl kararlılık ve toleranslandırma üzerine üç günlük yoğun kurs.</p>
+          </li>
+          <li>
+            <div class="tl-h"><h3>ASME GD&amp;T – ISO GPS</h3><span class="tl-d">Kasım 2025</span></div>
+            <p class="tl-o"><b translate="no">GeoTol</b></p>
+            <p>ASME Y14.5 GD&amp;T ve ISO GPS üzerine altı günlük kurs; eğitmen GeoTol başkanı ve ASME Y14.5 komitesi üyesi Scott Neumann.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="card" id="contact" aria-labelledby="h-contact">
+        <h2 id="h-contact">İletişim</h2>
+        <p>İş birliği, aracın tam sürümü ya da mekanik tasarım üzerine konuşmak için bana yazabilirsiniz.</p>
+        <div class="btnrow">
+          <a class="btn pri" href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn site-mail" href="#">e-posta</a>
+        </div>
+        <p class="small">Ankara, Türkiye</p>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap">
+    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
+    <p>Temayı sağ üstteki menüden değiştirebilirsiniz. Yılbaşı temasında kar topu, kardan adam, süsler ve iki kedi var.</p>
+  </footer>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>
