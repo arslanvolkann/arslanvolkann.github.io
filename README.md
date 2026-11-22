@@ -24,4 +24,4 @@ See [`license.html`](license.html) for a human-readable summary. Commercial
 use of covered materials requires separate written permission from the
 relevant rights holder.
 
-Required Notice: Copyright (c) 2026 Volkan Arslan (https://arslanvolkann.github.io/main/)
+Required Notice: Copyright (c) 2026 Volkan Arslan (https://arslanvolkann.github.io/)
