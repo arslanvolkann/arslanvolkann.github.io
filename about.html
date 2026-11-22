@@ -10,8 +10,7 @@
 <meta property="og:description" content="Volkan Arslan, mechanical design engineer: posts on mechanical design, precision engineering, GD&T and analysis, and browser-based engineering calculation tools.">
 <meta property="og:type" content="profile">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
-<script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
-<script>try{var __t=localStorage.getItem("va-site-tema");if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__h=new Date().getHours();__v=__s==="day"||(__s!=="night"&&__h>=9&&__h<16&&!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches))}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=localStorage.getItem("athermal-bag-hesabi-v14-dil");document.documentElement.setAttribute("lang",__l==="tr"||__l==="de"?__l:"en")}catch(e){document.documentElement.setAttribute("lang","en")}</script>
+<script>try{var __t=localStorage.getItem("athermal-bag-hesabi-v14-tema");if(__t===null)__t="holiday";if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__h=new Date().getHours();__v=__s==="day"||(__s!=="night"&&__h>=9&&__h<16&&!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches))}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=localStorage.getItem("athermal-bag-hesabi-v14-dil");document.documentElement.setAttribute("lang",__l==="tr"||__l==="de"?__l:"en")}catch(e){document.documentElement.setAttribute("lang","en")}</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -61,7 +60,7 @@
     <div role="tabpanel" id="sitePane" aria-label="İçerik">
       <section class="card hero" aria-labelledby="heroName">
         <div class="hero-id">
-          <img class="avatar" src="assets/avatar.jpg" alt="Volkan Arslan" width="240" height="240">
+          <div class="avatar" aria-hidden="true" translate="no">VA</div>
           <div>
             <p class="hero-name" id="heroName" translate="no">Volkan Arslan</p>
             <p class="hero-role">Mekanik Tasarım Mühendisi</p>
@@ -160,7 +159,7 @@
     </div>
   </main>
   <footer class="wrap">
-    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
+    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="license.html">Licensing / Lisans</a> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
     <p>Temayı sağ üstteki menüden değiştirebilirsiniz. Yılbaşı temasında kar topu, kardan adam, süsler ve iki kedi var.</p>
   </footer>
 </div>

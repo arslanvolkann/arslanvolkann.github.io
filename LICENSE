@@ -1,18 +1,16 @@
 Copyright (c) 2026 Volkan Arslan.
-All rights reserved.
 
-This repository contains materials subject to
-different licensing terms.
+This repository contains original materials covered by different licenses.
+Unless a file or page states otherwise:
 
-1. Written content, articles, diagrams and visual
-   materials are licensed under CC BY-NC 4.0.
-   See LICENSE-CONTENT.
+- Original written content and visual materials are covered by CC BY-NC 4.0.
+  See LICENSE-CONTENT.
+- Original software, source code and interactive engineering calculators are
+  covered by PolyForm Noncommercial License 1.0.0.
+  See LICENSE-SOFTWARE.
 
-2. Software, source code, engineering calculators
-   and interactive tools are licensed under
-   PolyForm Noncommercial License 1.0.0.
-   See LICENSE-SOFTWARE.
+Third-party materials are excluded and remain under their own licenses.
+Commercial use of materials covered by the noncommercial licenses requires
+separate written permission from the relevant rights holder.
 
-Commercial use requires prior written permission from the copyright holder, unless otherwise stated.
-
-Third-party materials are excluded and remain subject to their respective licenses.
+Required Notice: Copyright (c) 2026 Volkan Arslan (https://arslanvolkann.github.io/main/)

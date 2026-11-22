@@ -9,6 +9,19 @@ Personal site of Volkan Arslan, mechanical / opto-mechanical design engineer: pr
 
 Static site (plain HTML/CSS/JS) for GitHub Pages; no build step on GitHub. The interface is available in English, Turkish and German.
 
-Developed as a personal project; the code was written with the help of an AI coding assistant, with engineering decisions, sources and verification by the author.
-
 © 2026 Volkan Arslan. All rights reserved.
+
+
+## Licensing
+
+Unless otherwise stated, original written content and visual materials are
+licensed under **CC BY-NC 4.0** (`LICENSE-CONTENT`), while original software,
+source code and interactive engineering calculators are licensed under
+**PolyForm Noncommercial 1.0.0** (`LICENSE-SOFTWARE`).
+
+Third-party materials are excluded and remain subject to their own licenses.
+See [`license.html`](license.html) for a human-readable summary. Commercial
+use of covered materials requires separate written permission from the
+relevant rights holder.
+
+Required Notice: Copyright (c) 2026 Volkan Arslan (https://arslanvolkann.github.io/main/)
