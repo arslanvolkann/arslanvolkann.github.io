@@ -828,6 +828,7 @@ html[data-theme="dark"] .demo-ban{background:#3a230e;color:#fed7aa;border-color:
   </main>
   <footer class="wrap">
     <p>Hazırlayan: <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">Volkan Arslan</a> · web v2.9</p>
+    <p><a href="../../license.html">Licensing &amp; usage rights / Lisans ve kullanım koşulları</a></p>
     <p>Optik yapıştırma (potlama) için athermal bağ kalınlığı, lens gerilmesi ve kırılma kontrolü. Ön tasarım aracıdır; kritik montajda FEA ve test ile doğrulayın.</p>
   </footer>
 </div>
@@ -9585,7 +9586,7 @@ window.AthHoliday = (function () {
     try { if (window.AthHoliday) { if (t === "holiday") window.AthHoliday.start(); else window.AthHoliday.stop(); } } catch (e) { /* tema hatası uygulamayı bozmasın */ }
     measureHeader();
   }
-  function themeSet(t) { try { localStorage.setItem(THEME_KEY, t); }   /* "system" de kaydedilir: kayıt yoksa ilk açılış sayılır ve Yılbaşı gelir */ catch (e) { /* yok say */ } themeApply(t); }
+  function themeSet(t) { try { if (t === "system") localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, t); } catch (e) { /* yok say */ } themeApply(t); }
   function wireTheme() {
     var btn = $("themeBtn"), menu = $("themePop"), radios = $("themeMenu"), cur = themeLoad();
     if (window.AthHoliday) window.AthHoliday.onLayout = measureHeader;
