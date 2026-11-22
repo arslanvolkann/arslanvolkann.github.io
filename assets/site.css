@@ -769,7 +769,7 @@ html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
 #app.site .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .hero{padding:22px 22px 18px}
 .hero-id{display:flex;align-items:center;gap:16px;margin-bottom:12px}
-.avatar{object-fit:cover;flex:none;display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:26px;font-weight:600;letter-spacing:.02em}
+.avatar{flex:none;display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:26px;font-weight:600;letter-spacing:.02em}
 #app.site .hero-name{font-size:28px;font-weight:600;line-height:1.15;margin:0 0 2px}
 #app.site .hero-role{font-size:17px;font-weight:500;color:var(--accent);margin:0 0 2px}
 #app.site .hero-meta{font-size:14px;color:var(--ink2);margin:0}
@@ -820,5 +820,3 @@ html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
 #app.site .post-card.feed h3{font-size:19px}
 .sitenav a{flex:0 1 auto}
 @media print{.sitenav,.hdrR,.skip{display:none !important}#app.site .card{break-inside:avoid}}
-/* Yılbaşı: manzara (kar tepesi dahil) ve zemin katmanları içeriğin arkasında kalır; kartlar hiçbir zaman örtülmez */
-#app.site main.site-main{position:relative;z-index:22}
