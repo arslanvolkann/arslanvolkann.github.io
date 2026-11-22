@@ -9,7 +9,7 @@ Personal site of Volkan Arslan, mechanical / opto-mechanical design engineer: pr
 
 Static site (plain HTML/CSS/JS) for GitHub Pages; no build step on GitHub. The interface is available in English, Turkish and German.
 
-© 2026 Volkan Arslan. All rights reserved.
+© 2026 Volkan Arslan. See the Licensing section below.
 
 
 ## Licensing
