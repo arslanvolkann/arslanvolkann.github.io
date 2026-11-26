@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Camın genleşme katsayısı sabit değil — Volkan Arslan</title>
+<meta name="description" content="What the single α value in a catalog tells you, how temperature-dependent α(T) tables change the bond thickness, and how you can enter your own data in the tool.">
+<meta name="author" content="Volkan Arslan">
+<meta property="og:title" content="Camın genleşme katsayısı sabit değil — Volkan Arslan">
+<meta property="og:description" content="What the single α value in a catalog tells you, how temperature-dependent α(T) tables change the bond thickness, and how you can enter your own data in the tool.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
+<script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
+<script>try{var __t=localStorage.getItem("va-site-tema");if(__t===null){var __sd=new Date(),__sm=__sd.getMonth(),__sg=__sd.getDate();if((__sm===11&&__sg>=15)||(__sm===0&&__sg<=6))__t="holiday"}if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__d=new Date(),__h=__d.getHours()+__d.getMinutes()/60;__v=__s==="day"||(__s!=="night"&&((__h>=6&&__h<9.5?(__h-6)/5.25:(__h>=9.5&&__h<15?1:(__h>=15&&__h<16.5?1-(__h-15)/0.75:0)))>=0.5))}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=null;try{__l=localStorage.getItem("athermal-bag-hesabi-v14-dil")}catch(e){}if(__l!=="tr"&&__l!=="de"&&__l!=="en"){var __a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""];__l="en";for(var __i=0;__i<__a.length;__i++){var __p=String(__a[__i]||"").slice(0,2).toLowerCase();if(__p==="tr"||__p==="de"||__p==="en"){__l=__p;break}}}document.documentElement.setAttribute("lang",__l)}catch(e){document.documentElement.setAttribute("lang","en")}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div id="app" class="site" data-page="post">
+  <a class="skip" href="#main">İçeriğe geç</a>
+  <header class="top">
+    <div class="wrap">
+      <div class="row1">
+        <div>
+          <h1><a class="brand" href="../index.html" translate="no"><span class="mono" aria-hidden="true">VA</span>Volkan Arslan</a></h1>
+        </div>
+        <div class="hdrR">
+          <div class="themebox langbox" translate="no">
+            <button type="button" class="themebtn langbtn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Language / Dil: English">EN</button>
+            <div class="thememenu langmenu" id="langMenu" role="radiogroup" aria-label="Language / Dil" hidden>
+              <button type="button" role="radio" aria-checked="true" data-lang-opt="en" lang="en">English</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="de" lang="de">Deutsch</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="tr" lang="tr">Türkçe</button>
+            </div>
+          </div>
+          <div class="themebox">
+            <button type="button" class="themebtn" id="themeBtn" aria-haspopup="true" aria-expanded="false" aria-controls="themePop" aria-label="Tema: Sistem"><span id="themeIco" aria-hidden="true"></span></button>
+            <div class="thememenu" id="themePop" hidden>
+              <div id="themeMenu" role="radiogroup" aria-label="Tema">
+                <button type="button" role="radio" aria-checked="true" data-theme-opt="system">Sistem</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="light">Açık</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="dark">Koyu</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="holiday">Yılbaşı<span class="seas" hidden> (sezon: otomatik)</span></button>
+              </div>
+              <div id="holMenuX" class="thx" hidden>
+                <button type="button" id="holRunBtn" aria-pressed="true">Karı durdur</button>
+                <button type="button" id="holSetBtn" aria-haspopup="dialog">Yılbaşı efektleri…</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="tabs sitenav" aria-label="Site">
+        <a href="../index.html" data-nav="home">Yazılar</a>
+        <a href="../tools.html" data-nav="tools"><span class="tm">Araçlar</span><span class="td">Hesaplama araçları</span></a>
+        <a href="../about.html" data-nav="about">Hakkımda</a>
+        <a href="../license.html" data-nav="license">Lisans</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap site-main" id="main">
+    <div role="tabpanel" id="sitePane" aria-label="İçerik">
+    <div class="site-stack">
+      <article class="card post" aria-labelledby="postTitle">
+        <p class="post-back"><a href="../index.html">← Tüm yazılar</a></p>
+        <p class="pc-meta"><span class="tag">Opto-mekanik</span> <span class="tag">Malzeme verisi</span> <span class="tag">Hesaplama araçları</span> <span class="pc-date">Kasım 2026</span></p>
+        <h2 class="post-title" id="postTitle">Camın genleşme katsayısı sabit değil</h2>
+
+        <h3>Katalogdaki α neyi anlatıyor?</h3>
+
+        <p>Optik cam kataloglarında ısıl genleşme katsayısı genellikle iki değerle verilir: α(−30~70 °C) ve α(100~300 °C). Bunlar o aralıklardaki ortalama değerlerdir. Oysa camın genleşme katsayısı sıcaklıkla değişir; soğukta daha küçük, sıcakta daha büyüktür.</p>
+
+        <p>Bir yapıştırma hesabında önemli olan, kür sıcaklığından çalışma sıcaklığının uçlarına kadar camın toplam ne kadar uzayıp kısaldığıdır. Bu yüzden asıl gereken, kürden her uca kadar olan ortalama katsayıdır, yani sekant α. Bu değer, çalışma aralığı kataloğun −30~70 °C aralığından çıktıkça tek katalog değerinden belirgin biçimde ayrılır.</p>
+
+        <h3>Bir örnek: S-LAH79, −50 / +130 °C</h3>
+
+        <p>OHARA, camlarının çoğu için −100 °C ile 300 °C arasında 10 °C adımlı bir α tablosu yayımlıyor. S-LAH79'un veri sayfasında katalog değeri α(−30~70) = 6.0 ×10⁻⁶/°C. Kür sıcaklığı 65 °C, çalışma aralığı −50 / +130 °C alındığında tablodan:</p>
+
+        <ul>
+          <li>Kürden −50 °C'ye cam 670 µm/m kısalıyor; sekant α ≈ 5.83 ×10⁻⁶/°C.</li>
+
+          <li>Kürden +130 °C'ye cam 429 µm/m uzuyor; sekant α ≈ 6.60 ×10⁻⁶/°C.</li>
+
+        </ul>
+        <p>Tek katalog değeriyle her iki uç da 6.0 ile hesaplanırdı. Fark soğuk uçta yaklaşık %3, sıcak uçta yaklaşık %10.</p>
+
+        <figure class="post-fig"><img src="../assets/alfa-t.svg" alt="S-LAH79'un α(T) tablosu (mavi), kür sıcaklığı ve çalışma aralığının uçları, kürden her uca sekant α (kırmızı) ve katalogdaki tek α değeri (gri). α ×10⁻⁶/K." loading="lazy"><figcaption>S-LAH79'un α(T) tablosu (mavi), kür sıcaklığı ve çalışma aralığının uçları, kürden her uca sekant α (kırmızı) ve katalogdaki tek α değeri (gri). α ×10⁻⁶/K.</figcaption></figure>
+
+        <h3>Araçta nasıl kullanılıyor?</h3>
+
+        <p>Araç tablodaki aralıkları toplayarak her sıcaklık için camın toplam ısıl uzamasını buluyor, sonra kürden her uca kadar sekant α'yı hesaplıyor. Soğuk uçtaki gerilme soğuk ucun, sıcak uçtaki gerilme sıcak ucun α'sıyla hesaplanıyor. Tek bir α olsaydı tek bir sıfır gerilme kalınlığı olurdu; burada her uç için ayrı bir kalınlık çıkıyor ve araç athermal kalınlığı (h_opt) bu ikisine göre buluyor.</p>
+
+        <h3>Bağ kalınlığına etkisi</h3>
+
+        <p>Aynı örnekte (S-LAH79, Masterbond 2LO, Titanyum Grade 2, 6 × Ø2 mm pad, kür 65 °C, −50 / +130 °C) α(T) tablosu ile tek katalog α'sı karşılaştırıldığında:</p>
+
+        <div class="post-table"><table>
+          <thead><tr><th>Büyüklük</th><th>α(T) tablosu</th><th>Tek katalog α (6.0)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">h_opt</th><td>0.095 mm</td><td>0.099 mm</td></tr>
+            <tr><th scope="row">Çizime yazılacak h</th><td>0.093 ±0.030 mm</td><td>0.098 ±0.017 mm</td></tr>
+            <tr><th scope="row">Basmanın camda oluşturduğu çekme</th><td>0.53 MPa</td><td>0.17 MPa</td></tr>
+          </tbody>
+        </table></div>
+
+        <p>Tek α ile bağ yaklaşık %4 kalın çıkıyor ve tolerans yaklaşık yarıya iniyor. Basmanın camda oluşturduğu çekme ise üç katı kadar farklı hesaplanıyor. Bu örnekte camın kırılma olasılığı her iki durumda da hedefin çok altında; ama bağ kalınlığı ve tolerans doğrudan çizime giden değerler.</p>
+
+        <h3>Kendi verinizi girmek</h3>
+
+        <p>Her üretici veriyi aynı biçimde vermiyor. Araçta bir malzeme için α(T) verisini dört biçimde girebiliyorsunuz:</p>
+
+        <ul>
+          <li>Aralık ortalamaları (OHARA'nın 10 °C'lik tablosu gibi ya da değişken adımlı aralıklar),</li>
+
+          <li>Anlık α(T) noktaları,</li>
+
+          <li>Isıl uzama (ΔL/L) noktaları,</li>
+
+          <li>Polinom katsayıları.</li>
+
+        </ul>
+        <p>Araç veriyi −270 ile 500 °C arasında ortak bir ızgaraya çeviriyor ve katalog α'sını verinin −30~70 °C ortalamasından otomatik dolduruyor. Verinin kapsamadığı sıcaklıklarda uçtaki α ile devam ediyor ve bunu uyarıyla belirtiyor. Tablolu her malzemede tabloyu, grafiğini ve o anki sekant α değerlerini veritabanından açıp görebiliyorsunuz.</p>
+
+        <h3>Sınırlar</h3>
+
+        <p>Sıcaklığa bağlı α şimdilik yalnızca optik malzeme için kullanılıyor. Yuva ve yapıştırıcı hâlâ tek bir α ile hesaplanıyor; özellikle alüminyum yuvalarda ve camsı geçiş sıcaklığının (Tg) üstüne çıkan yapıştırıcılarda bu değerler de sıcaklıkla belirgin biçimde değişir.</p>
+
+        <h3>Diğer yenilikler</h3>
+
+        <ul>
+          <li>Veritabanına OHARA S-LAH79 eklendi; optik malzeme sayısı 173 oldu (131 OHARA).</li>
+
+          <li>Karar kartı artık çizim kalınlığının neden h_opt'tan farklı olduğunu ve onu hangi sınırın belirlediğini yazıyor.</li>
+
+          <li>Sınıra çok yakın geçen kontroller "sınırda" etiketiyle ve belirsizlik analizindeki geçme yüzdesiyle gösteriliyor.</li>
+
+          <li>Malzeme listelerinde yazarak arama yapılabiliyor; boş alanlarda önerilen değer görünüyor.</li>
+
+          <li>Telefonda girdiler ekranının altında kısa bir sonuç şeridi var; senaryo karşılaştırması telefonda kartlar halinde.</li>
+
+          <li>Karşılaştırma tablosunda bir yapıştırıcıyı mevcut tasarımla tek tıkla karşılaştırmak mümkün.</li>
+
+          <li>Yazdırılan rapor girdi tablosuyla başlıyor ve isteğe bağlı bir rapor başlığı alabiliyor.</li>
+
+          <li>Ekran okuyucular için sonuçlar yalnızca kısa bir özetle duyuruluyor.</li>
+
+          <li>Yılbaşı teması yalnızca Aralık ortası ile Ocak başı arasında kendiliğinden açılıyor; gün içinde şafak ve alacakaranlıkta renkler yumuşak geçiyor.</li>
+
+        </ul>
+        <h3>Kaynaklar</h3>
+
+        <ul>
+          <li>OHARA optik cam kataloğu, 2026-04.</li>
+
+          <li>OHARA S-LAH79 veri sayfası, 25-04 (üretici tarafından önerilmeyen/üretimi durdurulmuş cam olarak listeleniyor).</li>
+
+        </ul>
+      </article>
+    </div>
+    </div>
+  </main>
+  <footer class="wrap">
+    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="../license.html">Lisans</a> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
+    <p>Temayı sağ üstteki menüden değiştirebilirsiniz. Yılbaşı temasında kar topu, kardan adam, süsler ve iki kedi var.</p>
+  </footer>
+</div>
+<script src="../assets/i18n/alfa-t.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
