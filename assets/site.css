@@ -516,8 +516,9 @@ table.udt .famb::before{content:"▸ ";color:var(--ink2)}
 table.udt .famb[aria-expanded="true"]::before{content:"▾ "}
 table.udt td.uact{display:table-cell;white-space:normal;margin:0;width:1%;min-width:9.5rem}
 table.udt td.uact .btn,table.udt td.uact .btn.small{width:auto;min-height:32px;padding:0 8px;margin:2px 4px 2px 0;white-space:nowrap;font-size:12.5px}
-table.udt td.uact .cfm{display:inline-block;margin-right:4px;white-space:nowrap}
+table.udt td.uact .cfm{display:block;margin-right:4px;white-space:normal}
 table.udt td{padding-left:6px;padding-right:6px}
+table.udt th.un{max-width:24rem;overflow-wrap:anywhere}   /* v2.10: uzun kullanıcı adı tabloyu taşırmasın */
 @media (min-width:600px) and (max-width:1100px){table.udt{font-size:12px}table.udt th.un{min-width:8rem;max-width:17rem}table.udt td{white-space:normal;overflow-wrap:anywhere}table.udt td.uact{min-width:8.5rem}table.udt tr.urow td,table.udt tr.urow th{padding:5px 4px}}
 /* etiketler (adım 9) */
 .utags{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:6px;vertical-align:middle}
@@ -741,6 +742,28 @@ svg .ub-q{stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:3 3}
 }
 @media print{.pin2 .pin td:nth-child(2){min-width:3.4cm}.pin2 .pin td:last-child{white-space:nowrap}}
 
+/* v2.10: Veritabanı › optik α(T) tablosu (kaydırılabilir kap) */
+.uatab{margin:.35rem 0 .1rem;font-size:.9em}.uatab>summary{cursor:pointer}.uatw{max-height:15rem;overflow:auto;-webkit-overflow-scrolling:touch}
+
+/* v2.10 telefon: karar etiketi yalnız simge (≤ 420 px), başlık kelime ortasından bölünmez, sekme çubuğunda kenar solması */
+.top h1{overflow-wrap:normal}
+.top .chip .ci{display:none}
+@media (max-width:420px){
+  .top .chip{position:relative;min-width:44px;justify-content:center;padding:3px 8px}
+  .top .chip .cs{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .top .chip .ci{display:inline;font-size:19px;line-height:1}
+}
+.chiptip{position:absolute;right:var(--gut,16px);top:100%;margin-top:6px;max-width:calc(100% - 2 * var(--gut,16px));z-index:40;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:13px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.chiptip[hidden]{display:none}
+.tabs[data-ovl="r"]{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+.tabs[data-ovl="l"]{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 28px),transparent)}
+.tabs[data-ovl="l r"]{-webkit-mask-image:linear-gradient(to right,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+.hpnote{margin:6px 0 0;font-size:12px;opacity:.8;line-height:1.35}
+/* v2.10: geometriden türetilen (devre dışı) h / Δh alanı soluk görünür */
+.fld input.derived{opacity:.6;font-style:italic;cursor:not-allowed}
+.robh{margin:2px 0 0}.robh .rt,.robli .rt{font-style:italic}.robmsg:empty{display:none}
+@media print{[data-robapply],[data-robmsg]{display:none}}
+
 /* ---- Kişisel site: uygulama style.css'inin üstüne (tema değişkenleri, kartlar, başlık, tema menüsü, yılbaşı kapakları ortak) ---- */
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
@@ -820,3 +843,5 @@ html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
 #app.site .post-card.feed h3{font-size:19px}
 .sitenav a{flex:0 1 auto}
 @media print{.sitenav,.hdrR,.skip{display:none !important}#app.site .card{break-inside:avoid}}
+/* Yılbaşı: manzara (kar tepesi dahil) ve zemin katmanları içeriğin arkasında kalır; kartlar hiçbir zaman örtülmez */
+#app.site main.site-main{position:relative;z-index:22}
