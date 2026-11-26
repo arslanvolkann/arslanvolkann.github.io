@@ -96,7 +96,7 @@ main{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;padding-top:14px;
   .tabs .tm{display:none}.tabs .td{display:inline}
   .tabs button{flex:0 0 auto;padding:0 26px}
   main{grid-template-columns:minmax(340px,430px) 1fr;align-items:start;gap:22px}
-  #app[data-view="in"] #outPane,#app[data-view="in"] #inPane,#app[data-view="out"] #outPane,#app[data-view="out"] #inPane{display:block}
+  #app[data-view="in"] #outPane,#app[data-view="in"] #inPane,#app[data-view="out"] #outPane,#app[data-view="out"] #inPane{display:block}   /* v2.10 (kullanıcı, 2026-11-26): UX 3.2.7 geri alındı; sağ sütunun tamamı yapışkan (v2.9 düzeni), çünkü yapışkan .resTop alttaki tam genişlik bölümün üstüne biniyordu */
   #app[data-view="in"] #cmpPane,#app[data-view="out"] #cmpPane,#app[data-view="in"] #adhPane,#app[data-view="out"] #adhPane,#app[data-view="in"] #fxPane,#app[data-view="out"] #fxPane{display:none}
   #app[data-view="cmp"] main,#app[data-view="db"] main,#app[data-view="adh"] main,#app[data-view="fx"] main{grid-template-columns:minmax(0,1fr)}
   #app[data-view="cmp"] #cmpPane,#app[data-view="db"] #dbPane,#app[data-view="adh"] #adhPane,#app[data-view="fx"] #fxPane{display:block}
@@ -131,7 +131,7 @@ details.grp .body>*{min-width:0}
 .fld{display:block}
 .fld .lab{display:block;font-size:13px;color:var(--ink2);margin-bottom:3px}
 .fld .lab b{font-weight:600;color:var(--ink)}
-.fld .opt{display:inline-block;font-size:11px;line-height:1.5;color:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px;font-weight:400}
+.fld .opt,.prtdlg .opt{display:inline-block;font-size:11px;line-height:1.5;color:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px;font-weight:400}
 .fld .sym{font-family:var(--mono);font-size:12px;color:var(--ink2);margin-left:4px}
 .ctl{min-width:0;max-width:100%;display:flex;align-items:stretch;border:1px solid var(--field-line);border-radius:6px;background:var(--surface);min-height:44px}
 .ctl:focus-within{border-color:var(--focus);box-shadow:0 0 0 2px var(--focus);box-shadow:0 0 0 2px color-mix(in srgb,var(--focus) 35%,transparent)}
@@ -188,7 +188,7 @@ ol.dash details>summary::-webkit-details-marker{display:none}
 .recs p{margin:2px 0 4px}
 .recs ul.split{margin:2px 0 0;padding-left:18px}.recs ul.split li{border:0;padding:0 0 5px;font-size:14px}
 .recs details.more2>summary{cursor:pointer;color:var(--accent);font-size:13px;min-height:32px;display:flex;align-items:center}
-.recs .rh{font-weight:600;font-size:13px;margin-bottom:1px}
+.recs .rh{font-weight:500;font-size:13px;margin-bottom:1px;color:var(--ink2)}   /* UX 3.2.6: kalın yalnız ilk cümlede (recHtml <b>) */
 details.xp{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:8px}
 details.xp>summary{list-style:none;cursor:pointer;padding:11px 14px;min-height:44px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px}
 details.xp>summary::-webkit-details-marker{display:none}
@@ -735,15 +735,15 @@ svg .ub-q{stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:3 3}
   .ucard .ubar svg{max-height:4.2cm;width:auto;max-width:100%}
   .dash .more,.recs li{font-size:8.6pt}
   .ct th,.ct td{padding:2px 5px}
-  .pin2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+  .pin2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start}   /* v2.10: minmax(0,…) — uzun etiket/gaz satırı sütunu taşırmasın */
   .pin2 .pin{width:100%;font-size:8.2pt}
   .pin th,.pin td{padding:1px 4px}
   footer.wrap{font-size:8pt;margin-top:6px;padding-top:4px;break-before:avoid}
 }
-@media print{.pin2 .pin td:nth-child(2){min-width:3.4cm}.pin2 .pin td:last-child{white-space:nowrap}}
+@media print{.pin2 .pin{table-layout:fixed}.pin2 .pin th:first-child{width:46%}.pin2 .pin thead th:nth-child(2){width:38%}.pin2 .pin th,.pin2 .pin td{overflow-wrap:anywhere;word-break:normal;white-space:normal!important}.pin2 .pin td:last-child{white-space:nowrap}.pin2 .pin .gasrow td{white-space:normal}}
 
 /* v2.10: Veritabanı › optik α(T) tablosu (kaydırılabilir kap) */
-.uatab{margin:.35rem 0 .1rem;font-size:.9em}.uatab>summary{cursor:pointer}.uatw{max-height:15rem;overflow:auto;-webkit-overflow-scrolling:touch}
+.uatab{margin:.35rem 0 .1rem}
 
 /* v2.10 telefon: karar etiketi yalnız simge (≤ 420 px), başlık kelime ortasından bölünmez, sekme çubuğunda kenar solması */
 .top h1{overflow-wrap:normal}
@@ -763,6 +763,106 @@ svg .ub-q{stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:3 3}
 .fld input.derived{opacity:.6;font-style:italic;cursor:not-allowed}
 .robh{margin:2px 0 0}.robh .rt,.robli .rt{font-style:italic}.robmsg:empty{display:none}
 @media print{[data-robapply],[data-robmsg]{display:none}}
+
+/* α(T) tablosu: görüntüleme penceresi, düzenleyici, form bölümü */
+.atsr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.btn.at-open{position:relative;padding:0 12px}
+table.ct td .btn.at-open,.un .btn.at-open{min-height:32px}
+dialog.atdlg{width:min(calc(100vw - 16px),720px);max-width:none;max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px);padding:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.35);overflow:auto;-webkit-overflow-scrolling:touch}
+dialog.atdlg::backdrop{background:rgba(10,16,22,.55)}
+dialog.atdlg:not([open]){display:none}
+dialog.atdlg[open]{display:block}
+.atd-h{position:sticky;top:0;z-index:3;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line)}
+.atd-h h2{margin:0;font-size:1.05rem;line-height:1.3;overflow-wrap:anywhere;min-width:0}
+.atd-b{padding:10px 14px 16px;min-width:0}
+.atd-b .kv{grid-template-columns:auto minmax(0,1fr)}.atd-b .kv .k{white-space:normal;min-width:0}.atd-b .kv .v{text-align:right}
+.atstate{margin:8px 0;padding:6px 10px;border-radius:6px;background:var(--info-bg);color:var(--info);font-size:13.5px}
+.atstate.s-ok{background:var(--ok-bg);color:var(--ok)}.atstate.s-warn{background:var(--warn-bg);color:var(--warn)}
+.atiss{margin:8px 0;padding:6px 10px 6px 26px;border-radius:6px;font-size:13px;overflow-wrap:anywhere}
+.atiss.warn{background:var(--warn-bg);color:var(--warn)}.atiss.err{background:var(--fail-bg);color:var(--fail)}
+.atiss[hidden]{display:none}
+.atchart{margin:8px 0 2px;min-width:0}
+svg.atc{max-width:100%}
+svg .atcv{stroke:var(--accent);stroke-width:2.4}
+svg .atraw{stroke:var(--c-bond);stroke-width:2;stroke-dasharray:5 3;vector-effect:non-scaling-stroke}
+svg .atrawc{fill:none;stroke:var(--c-bond);stroke-width:1.4;vector-effect:non-scaling-stroke}
+svg .atpt{fill:var(--c-bond);stroke:var(--surface);stroke-width:1}
+svg .atpt.dv{fill:var(--surface);stroke:var(--c-bond);stroke-width:1.6}
+.atleg{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin:2px 0 6px;color:var(--ink2)}
+.atk{display:inline-block;width:18px;height:0;border-top:3px solid var(--accent);vertical-align:middle;margin-right:4px}
+.atk.r{border-top:3px dashed var(--c-bond)}
+.atk.h{height:10px;border:1px solid var(--hatch);background:repeating-linear-gradient(45deg,var(--hatch) 0 1px,transparent 1px 5px)}
+.atseg{margin:8px 0}
+.attw{max-height:50vh;overflow:auto;-webkit-overflow-scrolling:touch}
+table.ct tr.atx td{color:var(--ink2);font-style:italic}
+table.ct tr.hl td{background:var(--sel-bg);font-style:normal;color:var(--ink)}
+.atfmt{border:1px solid var(--line);border-radius:8px;margin:8px 0;padding:6px 10px}
+.atfmt legend{font-size:12.5px;color:var(--ink2);padding:0 4px}
+.atfmt .tgl{display:flex;align-items:flex-start;gap:6px;min-height:32px;padding:3px 0}
+.atrow2{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:4px 12px}
+.atpoly{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:4px 12px}
+.atfld .atsum{margin:2px 0 6px}
+.atbtns{margin:4px 0;flex-wrap:wrap}
+.atcons.warnx{color:var(--warn)}
+@media (max-width:600px){
+  dialog.atdlg{width:100vw;max-width:100vw;height:100vh;height:100dvh;max-height:none;border-radius:0;border:0}
+  .atd-b{padding:8px 12px 16px}
+  .attw{max-height:45vh}
+}
+@media print{dialog.atdlg{display:none!important}}
+
+
+/* ===== v2.10 UX turu (yalnız gösterim) ===== */
+.srs{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;margin:0;padding:0;border:0}
+.draw li.hwhy{font-family:var(--font);font-size:12.5px;color:var(--ink2)}
+.bord{display:inline-block;margin-left:6px;padding:0 7px;border:1px solid var(--line);border-radius:9px;font-size:11px;line-height:17px;font-weight:600;color:var(--ink2);background:var(--surface2);white-space:nowrap;vertical-align:1px}
+.mclink{margin:0 0 6px 30px;color:var(--ink2)}
+.recinfo{margin-top:12px}.recinfo>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px}.recinfo>ul{margin-top:6px}
+.robwhy{font-size:12.5px;color:var(--ink2);margin:1px 0 2px}
+.hoptwhy{margin:2px 0 6px}
+.ctl.sf{min-height:38px;margin-bottom:6px}.selfilt{width:100%;font-size:16px}.sfn{min-height:0;font-size:12px}.sfn:empty{display:none}
+.flashrow{outline:2px solid var(--accent);outline-offset:-2px;background:var(--sel-bg,rgba(255,242,204,.4))}
+.cmpwith{margin-left:4px;white-space:normal}
+table.ct td.c0 .btn+.btn{margin:4px 0 0 0}
+.scn-title{margin:10px 0 4px}.scn-title .ctl{margin-top:2px}
+.scn-cards{display:none}
+.scn-diff{margin:6px 0 8px}
+.scn-card{border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:0 0 8px;background:var(--surface)}
+.scn-card .sc-h{font-size:13px;font-weight:600;margin-bottom:6px}
+.scn-card .sc-ab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.scn-card .sc-c{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.scn-card .sc-l{font-size:11px;font-weight:700;color:var(--ink2)}
+.scn-card .sc-t{font-size:13px;overflow-wrap:anywhere}
+.scn-cl.dif .scn-card.same{display:none}
+.sc-v{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;text-align:left;background:none;border:0;padding:2px 0;color:var(--ink2);font-size:12px;cursor:pointer;max-width:100%;overflow-wrap:anywhere;min-height:24px}
+.sc-v.open{-webkit-line-clamp:unset;line-clamp:unset;overflow:visible}
+@media (max-width:599px){.scn-wide{display:none}.scn-cards{display:block}}
+/* telefonda Girdiler altında yapışkan mini sonuç şeridi (UX 6.2.1) */
+.minibar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;min-height:48px;box-sizing:border-box;padding:6px max(16px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--surface);border:0;border-top:1px solid var(--line);box-shadow:0 -2px 10px rgba(0,0,0,.14);color:var(--ink);font:inherit;text-align:left;cursor:pointer;align-items:center;gap:8px}
+.minibar .mb-t{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:center;font-size:14px}
+.minibar .ms-d{font-weight:600;font-size:13px;padding:2px 8px;border-radius:5px;border:1px solid transparent;white-space:nowrap}
+.minibar .ms-h,.minibar .ms-y{white-space:nowrap}
+.minibar .mb-go{font-size:22px;color:var(--ink2);flex:none}
+@keyframes mbflash{from{background:var(--sel-bg,#fff2cc)}to{background:var(--surface)}}
+@media (prefers-reduced-motion:no-preference){.minibar.flash{animation:mbflash .9s ease-out}}
+@media (max-width:899px){
+  #app[data-view="in"] .minibar:not([hidden]){display:flex}
+  #app[data-view="in"]{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}   /* içeriğin son satırı şeridin altında kalmasın */
+}
+@media print{
+  .minibar,.srs,.mclink,.recinfo>summary .num{display:none !important}
+  #results,.resTop,.resRest{display:block !important;position:static !important;max-height:none !important;overflow:visible !important}
+  h2,h3,details>summary{break-after:avoid;page-break-after:avoid}
+  #printIn{break-inside:avoid}
+  .hwhy,.robli{display:none !important}   /* çizim notu kutusunda yalnız çizime yazılacak satırlar basılır (UX 3.2.2) */
+}
+
+/* v2.10: yazdırma başlığı penceresi ve basımda kullanıcı başlığı */
+dialog.prtdlg{width:min(calc(100vw - 16px),440px)}
+.prtdlg h2{margin:0 0 10px;font-size:1.05rem}
+.prtdlg .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+#printTitle{margin:0 0 4px;font-size:20pt;line-height:1.2;overflow-wrap:anywhere}
+@media print{html.pt-on .top h1{display:none}}
 
 /* ---- Kişisel site: uygulama style.css'inin üstüne (tema değişkenleri, kartlar, başlık, tema menüsü, yılbaşı kapakları ortak) ---- */
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
@@ -845,3 +945,11 @@ html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
 @media print{.sitenav,.hdrR,.skip{display:none !important}#app.site .card{break-inside:avoid}}
 /* Yılbaşı: manzara (kar tepesi dahil) ve zemin katmanları içeriğin arkasında kalır; kartlar hiçbir zaman örtülmez */
 #app.site main.site-main{position:relative;z-index:22}
+/* yazı tablosu (yeni_yazi.py "tablo" bloğu) */
+.post-table{overflow-x:auto;margin:6px 0 14px;-webkit-overflow-scrolling:touch}
+.post-table table{border-collapse:collapse;width:100%;font-size:15px}
+.post-table th,.post-table td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top;font-size:15px;line-height:1.4}
+.post-table thead th{background:var(--surface2);font-weight:600}
+.post-table tbody th{font-weight:500;color:var(--ink)}
+.post-table td{font-variant-numeric:tabular-nums;white-space:nowrap}
+.post-table tbody th{min-width:9em}
