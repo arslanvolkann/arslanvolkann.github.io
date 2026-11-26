@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Camda basma gerçekten zararsız mı? — Volkan Arslan</title>
+<meta name="description" content="How the tension that compression creates in glass entered the calculation in v2.10, and how much it changed the result.">
+<meta name="author" content="Volkan Arslan">
+<meta property="og:title" content="Camda basma gerçekten zararsız mı? — Volkan Arslan">
+<meta property="og:description" content="How the tension that compression creates in glass entered the calculation in v2.10, and how much it changed the result.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
+<script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
+<script>try{var __t=localStorage.getItem("va-site-tema");if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__h=new Date().getHours();__v=__s==="day"||(__s!=="night"&&__h>=9&&__h<16)}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=null;try{__l=localStorage.getItem("athermal-bag-hesabi-v14-dil")}catch(e){}if(__l!=="tr"&&__l!=="de"&&__l!=="en"){var __a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""];__l="en";for(var __i=0;__i<__a.length;__i++){var __p=String(__a[__i]||"").slice(0,2).toLowerCase();if(__p==="tr"||__p==="de"||__p==="en"){__l=__p;break}}}document.documentElement.setAttribute("lang",__l)}catch(e){document.documentElement.setAttribute("lang","en")}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div id="app" class="site" data-page="post">
+  <a class="skip" href="#main">İçeriğe geç</a>
+  <header class="top">
+    <div class="wrap">
+      <div class="row1">
+        <div>
+          <h1><a class="brand" href="../index.html" translate="no"><span class="mono" aria-hidden="true">VA</span>Volkan Arslan</a></h1>
+        </div>
+        <div class="hdrR">
+          <div class="themebox langbox" translate="no">
+            <button type="button" class="themebtn langbtn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Language / Dil: English">EN</button>
+            <div class="thememenu langmenu" id="langMenu" role="radiogroup" aria-label="Language / Dil" hidden>
+              <button type="button" role="radio" aria-checked="true" data-lang-opt="en" lang="en">English</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="de" lang="de">Deutsch</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="tr" lang="tr">Türkçe</button>
+            </div>
+          </div>
+          <div class="themebox">
+            <button type="button" class="themebtn" id="themeBtn" aria-haspopup="true" aria-expanded="false" aria-controls="themePop" aria-label="Tema: Sistem"><span id="themeIco" aria-hidden="true"></span></button>
+            <div class="thememenu" id="themePop" hidden>
+              <div id="themeMenu" role="radiogroup" aria-label="Tema">
+                <button type="button" role="radio" aria-checked="true" data-theme-opt="system">Sistem</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="light">Açık</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="dark">Koyu</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="holiday">Yılbaşı</button>
+              </div>
+              <div id="holMenuX" class="thx" hidden>
+                <button type="button" id="holRunBtn" aria-pressed="true">Karı durdur</button>
+                <button type="button" id="holSetBtn" aria-haspopup="dialog">Yılbaşı efektleri…</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="tabs sitenav" aria-label="Site">
+        <a href="../index.html" data-nav="home">Yazılar</a>
+        <a href="../tools.html" data-nav="tools"><span class="tm">Araçlar</span><span class="td">Hesaplama araçları</span></a>
+        <a href="../about.html" data-nav="about">Hakkımda</a>
+        <a href="../license.html" data-nav="license">Lisans</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap site-main" id="main">
+    <div role="tabpanel" id="sitePane" aria-label="İçerik">
+    <div class="site-stack">
+      <article class="card post" aria-labelledby="postTitle">
+        <p class="post-back"><a href="../index.html">← Tüm yazılar</a></p>
+        <p class="pc-meta"><span class="tag">Opto-mekanik</span> <span class="tag">Yapıştırma</span> <span class="tag">Hesaplama araçları</span> <span class="pc-date">Kasım 2026</span></p>
+        <h2 class="post-title" id="postTitle">Camda basma gerçekten zararsız mı?</h2>
+
+        <h3>Araç hakkında kısaca</h3>
+
+        <p>Athermal Bağ Hesabı, bir lensin metal ya da başka bir yuvaya yapıştırıcıyla bağlandığı montajlarda bağ kalınlığını ve bu bağın sıcaklık ve şok altında lense ve yapıştırıcıya yüklediği gerilmeleri hesaplayan bir araç. Veritabanında 172 optik malzeme (130 OHARA, 28 SCHOTT, 10 kristal, 4 diğer), 75 yuva malzemesi (60 metal, 9 polimer, 6 seramik), 40 yapıştırıcı (23 epoksi, 9 silikon, 7 UV, 1 poliüretan), 42 Weibull veri seti ve 97 formül kartı bulunuyor.</p>
+
+        <h3>Basmayı neden sıfır sayıyorduk, artık neden saymıyoruz?</h3>
+
+        <p>Araç, lensle yapıştırıcı arasındaki radyal gerilmeyi bağ boyunca ortalama bir değer olarak hesaplar. Önceki sürümlerde bu gerilme basma çıkarsa sıfır kabul ediliyordu. Gerekçe, camın basmaya karşı çok dayanıklı olması ve kırılmanın çekmeden başlamasıydı.</p>
+
+        <p>Bu kabulün eksiği şu: camda bir bölge basma altındaysa, kuvvet dengesi için o bölgeyi çevreleyen cam çekmeye zorlanır. Kasunic (Optomechanical Systems Engineering, s.120, Şekil 6.14 ve Denk. 6.7) bu çekmeyi camın Poisson oranıyla ilişkilendirir: σt = (1/3)(1 − 2ν)·σc ≈ 0.2·σc.</p>
+
+        <figure class="post-fig"><img src="../assets/basma-cekme.svg" alt="Bağın lens kenarında oluşturduğu basma bölgesi (σc, mavi) ve onu çevreleyen çekme (σt, kırmızı kesikli). Ölçeksiz şema." loading="lazy"><figcaption>Bağın lens kenarında oluşturduğu basma bölgesi (σc, mavi) ve onu çevreleyen çekme (σt, kırmızı kesikli). Ölçeksiz şema.</figcaption></figure>
+
+        <p>Schwertz (2010, s.20–21) aynı ilişkiyi σt ≈ σc/6 olarak sadeleştirir. Bu sadeleştirmenin hatası, Poisson oranı 0.22–0.27 olan camlarda %10'un altındadır. Schwertz formülün geçerliliğinin hâlâ tartışmalı olduğunu, ama kabul gören yaklaşım olduğunu da not eder. N-BK7 için σc/σt ≈ 5.1, kuvars cam için ≈ 4.6'dır.</p>
+
+        <p>Pepi (Strength Properties of Glass and Ceramics, s.104–105) yapıştırılmış bağlarda aynı olguyu anlatır. Bağın altında gerilme düşük ve basma yönünde olabilir; bağ kenarında ise sert biçimde yükselir ve çekmeye döner. Cam kırılması da çoğunlukla bu kenar bölgesinden başlar.</p>
+
+        <p>Bu nedenle bir basma değeri, camda çekme olmadığını göstermez; basmanın çevresinde bir çekme bileşeni vardır. Önceki kural bu bileşeni yok sayıyordu, bu sürümde hesaba katılıyor.</p>
+
+        <h3>Araçta nasıl kullanılır</h3>
+
+        <p>Formül aslında tutucu halkanın lense bastırdığı temas basıncı için verilmiştir. Araçta yapıştırıcının lense uyguladığı radyal basmaya uygulanır.</p>
+
+        <p>Her yük durumu için (2 sıcaklık × 3 bağ kalınlığı × 2 şok yönü) lensteki radyal gerilme basma çıkarsa, yerine (1 − 2ν)/3·|σ| büyüklüğünde bir çekme konur. Bu çekme kayma gerilmesiyle birleştirilir ve camın Weibull kırılma olasılığı hesabına girer.</p>
+
+        <h3>Yapıştırıcıda neden değişmedi?</h3>
+
+        <p>Kasunic'in formülü, basılan bir bölgenin çevresindeki malzemenin dengeyi sağlamak için çekmeye girmesini anlatır. Lenste durum tam olarak budur: bağ lensin kenarındaki bir bandı basar, lensin geri kalanı yüksüzdür ve bu çevre bölge çekmeye zorlanır.</p>
+
+        <p>Yapıştırıcı katmanı ise iki sert yüzey arasında kalan ince bir tabakadır ve tamamı aynı anda basılır. Onu çevreleyip çekmeye girecek yüksüz bir yapıştırıcı bölgesi yoktur. Bu nedenle formülün anlattığı mekanizma burada aynı şekilde ortaya çıkmaz.</p>
+
+        <p>Yapıştırıcının asıl yükü kaymadır ve araç her yük durumu için en büyük asal gerilmeyi kayma ile radyal gerilmeden hesaplar. Basma bu hesapta asal gerilmeyi azaltır. Basmayı sıfır saymak sonucu büyütür, yani güvenli tarafta kalır. Camda ise basmayı sıfır saymak gerçekte var olan bir çekmeyi yok saymak demekti. İki malzemeye farklı davranılmasının nedeni budur.</p>
+
+        <p>Bağ kenarındaki gerilme yığılması da yapıştırıcı kontrolünde ayrı bir gerilme yığılma katsayısıyla hesaba katılır.</p>
+
+        <h3>Bağ kalınlığı seçimi de bu kurala bağlandı</h3>
+
+        <p>Basmanın camda çekme oluşturduğu kabul edilince, bağ kalınlığının nasıl seçildiği de yeniden ele alınmalıydı. Önceki sürümlerde tolerans bandı en büyük çekmeyi en küçük yapacak şekilde yerleştiriliyor, basma yalnızca lensin basma sınırıyla kontrol ediliyordu. Tüm çalışma aralığı kür sıcaklığının bir tarafında kaldığında ise bant tamamen basma tarafına konuyordu.</p>
+
+        <p>v2.10'da bant, camdaki en büyük gerilmeye göre seçiliyor. Bu, camın kırılma hesabında kullanılan gerilmedir: radyal gerilme ile kaymanın birleşimi, basma (1 − 2ν)/3 ile çekmeye çevrilmiş halde. Yapıştırıcı, radyal çekme sınırı, camın kırılma olasılığı hedefi, lens ve yuva kontrolleri ise seçimde aşılmaması gereken sınırlar.</p>
+
+        <p>Önceliği cam alır. Camın kırılma olasılığı hedefin yüzde birinin altında kalan konumlar varsa, bunlar arasından athermal kalınlığa (h_opt) en yakın olanı seçilir; böylece bağ gereksiz yere kalınlaşmaz. Böyle bir konum yoksa camdaki gerilmeyi en küçük yapan konum seçilir. Bazı sınırlar hiçbir konumda sağlanamıyorsa yalnızca onlar bırakılır, diğerleri korunur ve araç hangi sınırın sağlanamadığını yazar. Tolerans penceresi de aynı sınırlarla hesaplanıyor; hiçbir tolerans mümkün değilse araç bunu ve pencereyi hangi sınırın kapattığını açıkça bildiriyor.</p>
+
+        <p>Sıcaklığa bağlı genleşme tablosu olan camlarda athermal kalınlık da aynı ağırlıkla bulunuyor: kür sıcaklığı çalışma aralığının dışındaysa, iki uçtaki çekme ile basmanın oluşturduğu çekme eşitleniyor. Dayanıklı h de aynı ölçütle aranıyor; tek farkı, malzeme verilerindeki belirsizliğin kötümser senaryosunda da sınırların sağlanmasını istemesi.</p>
+
+        <h3>Sonuç ne kadar değişti?</h3>
+
+        <p>Varsayılan örnekte camın kırılma olasılığı yaklaşık 3·10⁻¹⁶'dan 1.3·10⁻¹⁴'e çıktı. Yaklaşık 40 katlık bir artış, ama hâlâ 10⁻⁴ hedefinin çok altında. Bağ kalınlığı 0.047'den 0.048 mm'ye, yani athermal kalınlığa yaklaştı; yapıştırıcı kontrolü sınırda ama geçiyor. Genel karar değişmedi.</p>
+
+        <h3>Diğer yenilikler</h3>
+
+        <ul>
+          <li>130 OHARA camı, 10 °C aralıklı sıcaklığa bağlı ısıl genleşme katsayısı tablosuyla eklendi; hesap, kür sıcaklığından çalışma sıcaklığına kadar sekant genleşmeyi kullanıyor.</li>
+
+          <li>Titreşim hesabında varsayılan kalite faktörü Q = 25 oldu (Schwertz 2010, s.61).</li>
+
+          <li>Pad bağlarında yanal frekans için Hatheway yaklaşımı karşılaştırma olarak gösteriliyor.</li>
+
+          <li>Telefon görünümü iyileştirildi.</li>
+
+        </ul>
+        <h3>Kaynaklar</h3>
+
+        <ul>
+          <li>J. W. Pepi, Strength Properties of Glass and Ceramics, SPIE Press, 2014, s.104–105.</li>
+
+          <li>K. J. Kasunic, Optomechanical Systems Engineering, Wiley, 2015, s.120, Denk. 6.7.</li>
+
+          <li>K. Schwertz, Useful Estimations and Rules of Thumb for Optomechanics, 2010, s.12, 20–21, 36–38, 61.</li>
+
+          <li>K. Schwertz, J. H. Burge, Field Guide to Optomechanical Design and Analysis, SPIE Press, 2012, s.48–50.</li>
+
+          <li>OHARA optik cam kataloğu, 2026-04.</li>
+
+        </ul>
+      </article>
+    </div>
+    </div>
+  </main>
+  <footer class="wrap">
+    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="../license.html">Lisans</a> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
+    <p>Temayı sağ üstteki menüden değiştirebilirsiniz. Yılbaşı temasında kar topu, kardan adam, süsler ve iki kedi var.</p>
+  </footer>
+</div>
+<script src="../assets/i18n/camda-basma.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
