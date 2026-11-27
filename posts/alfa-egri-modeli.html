@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Genleşme eğrisini fizikle düzgünleştirmek — Volkan Arslan</title>
+<meta name="description" content="The false dip in the α(T) curve of titanium, the Grüneisen–Debye model, what happens when the model does not fit the data, why Invar is left out and why polynomials are not enough.">
+<meta name="author" content="Volkan Arslan">
+<meta property="og:title" content="Genleşme eğrisini fizikle düzgünleştirmek — Volkan Arslan">
+<meta property="og:description" content="The false dip in the α(T) curve of titanium, the Grüneisen–Debye model, what happens when the model does not fit the data, why Invar is left out and why polynomials are not enough.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
+<script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
+<script>try{var __t=localStorage.getItem("va-site-tema");if(__t===null){var __sd=new Date(),__sm=__sd.getMonth(),__sg=__sd.getDate();if((__sm===11&&__sg>=15)||(__sm===0&&__sg<=6))__t="holiday"}if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__d=new Date(),__h=__d.getHours()+__d.getMinutes()/60;__v=__s==="day"||(__s!=="night"&&((__h>=6&&__h<9.5?(__h-6)/5.25:(__h>=9.5&&__h<15?1:(__h>=15&&__h<16.5?1-(__h-15)/0.75:0)))>=0.5))}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=null;try{__l=localStorage.getItem("athermal-bag-hesabi-v14-dil")}catch(e){}if(__l!=="tr"&&__l!=="de"&&__l!=="en"){var __a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""];__l="en";for(var __i=0;__i<__a.length;__i++){var __p=String(__a[__i]||"").slice(0,2).toLowerCase();if(__p==="tr"||__p==="de"||__p==="en"){__l=__p;break}}}document.documentElement.setAttribute("lang",__l)}catch(e){document.documentElement.setAttribute("lang","en")}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div id="app" class="site" data-page="post">
+  <a class="skip" href="#main">İçeriğe geç</a>
+  <header class="top">
+    <div class="wrap">
+      <div class="row1">
+        <div>
+          <h1><a class="brand" href="../index.html" translate="no"><span class="mono" aria-hidden="true">VA</span>Volkan Arslan</a></h1>
+        </div>
+        <div class="hdrR">
+          <div class="themebox langbox" translate="no">
+            <button type="button" class="themebtn langbtn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Language / Dil: English">EN</button>
+            <div class="thememenu langmenu" id="langMenu" role="radiogroup" aria-label="Language / Dil" hidden>
+              <button type="button" role="radio" aria-checked="true" data-lang-opt="en" lang="en">English</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="de" lang="de">Deutsch</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="tr" lang="tr">Türkçe</button>
+            </div>
+          </div>
+          <div class="themebox">
+            <button type="button" class="themebtn" id="themeBtn" aria-haspopup="true" aria-expanded="false" aria-controls="themePop" aria-label="Tema: Sistem"><span id="themeIco" aria-hidden="true"></span></button>
+            <div class="thememenu" id="themePop" hidden>
+              <div id="themeMenu" role="radiogroup" aria-label="Tema">
+                <button type="button" role="radio" aria-checked="true" data-theme-opt="system">Sistem</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="light">Açık</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="dark">Koyu</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="holiday">Yılbaşı<span class="seas" hidden> (sezon: otomatik)</span></button>
+              </div>
+              <div id="holMenuX" class="thx" hidden>
+                <button type="button" id="holRunBtn" aria-pressed="true">Karı durdur</button>
+                <button type="button" id="holSetBtn" aria-haspopup="dialog">Yılbaşı efektleri…</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="tabs sitenav" aria-label="Site">
+        <a href="../index.html" data-nav="home">Yazılar</a>
+        <a href="../tools.html" data-nav="tools"><span class="tm">Araçlar</span><span class="td">Hesaplama araçları</span></a>
+        <a href="../about.html" data-nav="about">Hakkımda</a>
+        <a href="../license.html" data-nav="license">Lisans</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap site-main" id="main">
+    <div role="tabpanel" id="sitePane" aria-label="İçerik">
+    <div class="site-stack">
+      <article class="card post" aria-labelledby="postTitle">
+        <p class="post-back"><a href="../index.html">← Tüm yazılar</a></p>
+        <p class="pc-meta"><span class="tag">Opto-mekanik</span> <span class="tag">Malzeme verisi</span> <span class="tag">Hesaplama araçları</span> <span class="pc-date">Kasım 2026</span></p>
+        <h2 class="post-title" id="postTitle">Genleşme eğrisini fizikle düzgünleştirmek</h2>
+
+        <h3>Titanyum tablosunda bir çukur</h3>
+
+        <p>Yuva malzemelerinin α(T) tablolarını kurduğum yazıda, tabloların uzama verisinden düzgün bir eğri uydurularak çıkarıldığını anlatmıştım. Ti-6Al-4V'nin α(T) penceresine bakınca bir tuhaflık gördüm: α −20 °C'de 8.56, 20 °C'de 8.19, 60 °C'de yeniden 8.65. Yani oda sıcaklığı civarında α azalıp sonra artıyor. Bu titanyumda beklenen bir davranış değil; α-β titanyum alaşımlarında bu aralıkta faz dönüşümü ya da manyetik etki yok.</p>
+
+        <p>Çukurun kaynağı veri birleştirmesi. 20 °C altında ASM'nin düşük sıcaklık tablosu, üstünde başka bir kaynak var ve tablo değerleri yuvarlanmış. Eğri, her kaynağın belirsizliği içinde kalan en düzgün eğri olarak seçiliyordu; ama "düzgün" yalnızca matematiksel bir koşuldu. Eğrinin fiziksel olarak anlamlı olması için hiçbir şart yoktu ve iki kaynağın birleştiği yerde eğri hafifçe büküldü. Uzamada bu bükülme yuvarlama payının içinde kalıyor, ama α uzamanın eğimi olduğu için eğimde görünür bir çukura dönüşüyor.</p>
+
+        <figure class="post-fig"><img src="../assets/alfa-model-ti.svg" alt="Ti-6Al-4V: komşu veri noktalarından hesaplanan α (daireler), yalnız matematiksel düzgünlükle uydurulan eğri (gri), α için 4. dereceden polinom (turuncu, kesikli) ve Grüneisen–Debye modeli (mavi). α ×10⁻⁶/K." loading="lazy"><figcaption>Ti-6Al-4V: komşu veri noktalarından hesaplanan α (daireler), yalnız matematiksel düzgünlükle uydurulan eğri (gri), α için 4. dereceden polinom (turuncu, kesikli) ve Grüneisen–Debye modeli (mavi). α ×10⁻⁶/K.</figcaption></figure>
+
+        <h3>İlk fikir: α azalamaz</h3>
+
+        <p>Metallerin çoğunda α sıcaklıkla artar. Bu yüzden ilk olarak eğriye "α azalamaz" kısıtı ekledim. Bu her malzemede geçerli değil: Invar'da α oda sıcaklığı civarında azalıyor, bazı malzemeler çok soğukta ya da yüksek sıcaklıkta faz dönüşümü yüzünden kuralı bozuyor. Bu yüzden kısıtı yalnız bir sıcaklık penceresinde ve malzeme bazında uyguladım; Invar tamamen dışarıda.</p>
+
+        <p>Kısıt bir şeyi düzeltmeden önce sınanıyor: kısıtlı eğri veriden belirgin biçimde uzaklaşıyorsa (χ² artışı 4'ten büyükse) kısıt o bölgede uygulanmıyor, çünkü o zaman verideki azalma gerçek olabilir. Titanyumda tam olarak bu oldu: kısıt χ²'yi 13 artırdı ve reddedildi. Yani yalnız matematiksel düzgünlükle uydurulan eğri, veriyle çukur arasında ayrım yapamıyordu.</p>
+
+        <h3>Grüneisen–Debye modeli</h3>
+
+        <p>Çözüm, eğriye bir şekil dayatmak yerine fiziksel bir model uydurmak oldu. Grüneisen bağıntısına göre katılarda ısıl genleşme ısı kapasitesiyle orantılıdır; ısı kapasitesinin sıcaklıkla değişimini de Debye modeli verir. Buna göre:</p>
+
+        <ul>
+          <li>α(T) = A·D(T/θ) + B·T + C·T². D, Debye ısı kapasitesi fonksiyonu; θ, Debye sıcaklığı; B·T terimi metallerde elektron katkısı, C·T² terimi yüksek sıcaklıktaki anharmonik katkı için.</li>
+
+          <li>Model doğrudan uzamaya uyduruluyor (α'nın integrali), çünkü kaynaklar uzama veriyor. A, B, C doğrusal en küçük karelerle, θ tarama ile bulunuyor. θ burada yalnız bir uydurma parametresi; malzemenin gerçek Debye sıcaklığı olarak okunmamalı.</li>
+
+          <li>Model bir malzemeye ancak veriyi karşılıyorsa uygulanıyor: her noktada yuvarlama payına ek olarak %2 ölçüm belirsizliği varsayıldığında χ²/N en fazla 3 olmalı ve α pencere içinde azalmamalı. %2 benim seçimim; CINDAS'ın önerilen değerler için verdiği ±%5 belirsizliğin altında kalacak biçimde seçtim.</li>
+
+          <li>Model reddedilirse (SS 410 ve berilyum bakırda oldu) eski düzgünleştirme "α azalamaz" kısıtıyla birlikte kullanılıyor. Invar'a model hiç uygulanmıyor.</li>
+
+        </ul>
+        <p>Titanyumda sonuç: α −100 °C'de 8.12, 20 °C'de 8.49, 100 °C'de 8.64, 250 °C'de 9.82. Çukur yok ve eğri veri noktalarının arasından geçiyor. Model ile yalnız veriye bağlı düzgünleştirme arasındaki fark −100…150 °C aralığında, modelin uygulandığı bütün malzemelerde uzamanın yaklaşık %1.5'ini geçmiyor.</p>
+
+        <h3>Bağ kalınlığına etkisi</h3>
+
+        <p>Varsayılan örnekte (Ti-6Al-4V yuva, −40 / +70 °C) yuvanın uçlardaki sekant α'ları 8.43 / 8.41'den 8.46 / 8.51'e çıkıyor ve önerilen bağ kalınlığı 0.050 mm'den 0.052 mm'ye çıkıyor (yaklaşık %4). Alüminyum ve paslanmaz yuvalarda değişim %1–1.5 civarında. Fark küçük ama yönü önemli: eski eğride soğuk uçtaki sekant α sıcak uçtakinden büyüktü, yani titanyum ısındıkça daha az genleşiyormuş gibi hesaplanıyordu.</p>
+
+        <h3>Invar'a uygulasaydık ne olurdu?</h3>
+
+        <p>Invar'ın düşük genleşmesi manyetik bir etkiden gelir: Curie noktasının altında manyetik düzenin yarattığı hacim artışı, ısıl genleşmeyi büyük ölçüde dengeler. Grüneisen–Debye modeli yalnız örgü titreşimlerini ve elektronları anlatır; bu etkiyi içermez. Modeli Invar'a zorla uydurunca χ²/N 4.91 çıkıyor, yani kabul sınırının dışında. Eğri α'nın −100 °C civarındaki tepesini ve 60 °C civarındaki çukurunu yumuşatıyor.</p>
+
+        <figure class="post-fig"><img src="../assets/alfa-model-invar.svg" alt="Invar 36: komşu veri noktalarından α (daireler), araçtaki eğri (kırmızı) ve zorla uydurulmuş Grüneisen–Debye modeli (mavi, kesikli). α ×10⁻⁶/K." loading="lazy"><figcaption>Invar 36: komşu veri noktalarından α (daireler), araçtaki eğri (kırmızı) ve zorla uydurulmuş Grüneisen–Debye modeli (mavi, kesikli). α ×10⁻⁶/K.</figcaption></figure>
+
+        <p>Fark ortalamada küçük görünse de Invar'ın kullanıldığı yerde büyük. 65 °C kürden 85 °C'ye sekant α veride 1.34, zorlanmış modelde 2.12; yaklaşık %60 fazla. Invar zaten α'sı çok küçük olduğu için seçilir; bu kadar bir hata, cam ile yuva arasındaki α farkını ve dolayısıyla bağ kalınlığını doğrudan bozar. Bu yüzden Invar'da veri olduğu gibi kullanılıyor.</p>
+
+        <h3>Polinom yetmez mi?</h3>
+
+        <p>NIST'in kriyojenik veritabanı uzamayı polinom biçimindeki denklemlerle veriyor. Ben de α için 3. ve 4. dereceden polinomları aynı veriye, aynı belirsizlikle uydurdum. Sonuç:</p>
+
+        <ul>
+          <li>Titanyumda çukur kaybolmuyor, sadece biçim değiştiriyor: 4. derece polinomda α 20 °C ile 60 °C arasında hafifçe azalıyor (8.49'dan 8.47'ye).</li>
+
+          <li>Verinin seyrek olduğu uçlarda polinom modelden ayrılıyor; örneğin −150 °C civarında modelin belirgin biçimde altında kalıyor. Polinomun fiziksel bir sınırı yok; Debye fonksiyonu ise 0 K'de sıfıra gider ve yüksek sıcaklıkta sabitlenir.</li>
+
+          <li>NIST'in kendisi de 2000 tarihli veritabanı makalesinde, uzama için verilen denklemlerin türevi alınarak α'nın iyi elde edilemeyeceğini belirtiyor.</li>
+
+        </ul>
+        <h3>Ayrı bir hesaplama aracı geliyor</h3>
+
+        <p>Bu düzgünleştirmeyi Athermal Bağ Hesabı'nın içinde gömülü bırakmak istemiyorum. İleride ayrı bir hesaplama aracı olarak yayımlayacağım: kendi uzama ya da α verinizi .xlsx veya .csv olarak yüklüyorsunuz, araç Grüneisen–Debye modelini ve kısıtlı düzgünleştirmeyi uyguluyor, modelin veriyi karşılayıp karşılamadığını χ² ile gösteriyor ve sonucu Athermal Bağ Hesabı'na doğrudan alınabilecek bir α(T) tablosu olarak veriyor. Hangi sıcaklık penceresinde hangi kısıtın uygulanacağı ve modelin kullanılıp kullanılmayacağı sizde kalacak; Invar gibi kuralı bozan malzemeler için bu seçim gerekli.</p>
+
+        <h3>Kaynaklar</h3>
+
+        <ul>
+          <li>T. H. K. Barron, G. K. White, Heat Capacity and Thermal Expansion at Low Temperatures, Kluwer/Plenum, 1999 (Grüneisen bağıntısı ve Debye modeli).</li>
+
+          <li>E. D. Marquardt, J. P. Le, R. Radebaugh, Cryogenic Material Properties Database, 11th International Cryocooler Conference, 2000.</li>
+
+          <li>NIST Cryogenic Material Properties (Ti-6Al-4V, Invar, 304, 6061-T6).</li>
+
+          <li>ASM, Materials at Low Temperatures, 1983 (uzama tabloları).</li>
+
+          <li>E. T. Whittaker, On a New Method of Graduation, Proc. Edinburgh Math. Soc. 41, 1923 (cezalı düzgünleştirme).</li>
+
+        </ul>
+      </article>
+    </div>
+    </div>
+  </main>
+  <footer class="wrap">
+    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="../license.html">Lisans</a> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
+    <p>Temayı sağ üstteki menüden değiştirebilirsiniz. Yılbaşı temasında kar topu, kardan adam, süsler ve iki kedi var.</p>
+  </footer>
+</div>
+<script src="../assets/i18n/alfa-egri-modeli.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>

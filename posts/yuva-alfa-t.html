@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yuvanın genleşme katsayısı da sabit değil — Volkan Arslan</title>
+<meta name="description" content="Why sources give different α values for the same metal, how the temperature-dependent tables were built from several sources, what that does to the bond thickness, and α(T) for the housing and adhesive in v3.0.">
+<meta name="author" content="Volkan Arslan">
+<meta property="og:title" content="Yuvanın genleşme katsayısı da sabit değil — Volkan Arslan">
+<meta property="og:description" content="Why sources give different α values for the same metal, how the temperature-dependent tables were built from several sources, what that does to the bond thickness, and α(T) for the housing and adhesive in v3.0.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
+<script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
+<script>try{var __t=localStorage.getItem("va-site-tema");if(__t===null){var __sd=new Date(),__sm=__sd.getMonth(),__sg=__sd.getDate();if((__sm===11&&__sg>=15)||(__sm===0&&__sg<=6))__t="holiday"}if(__t==="light"||__t==="dark"||__t==="holiday"){document.documentElement.setAttribute("data-theme",__t);var __v=false;if(__t==="holiday"){var __s=JSON.parse(localStorage.getItem("athermal-bag-hesabi-v14-yilbasi")||"{}").variant,__d=new Date(),__h=__d.getHours()+__d.getMinutes()/60;__v=__s==="day"||(__s!=="night"&&((__h>=6&&__h<9.5?(__h-6)/5.25:(__h>=9.5&&__h<15?1:(__h>=15&&__h<16.5?1-(__h-15)/0.75:0)))>=0.5))}if(__v)document.documentElement.setAttribute("data-hol-var","day");document.documentElement.style.colorScheme=__t==="holiday"?(__v?"light":"dark"):__t}}catch(e){}try{var __l=null;try{__l=localStorage.getItem("athermal-bag-hesabi-v14-dil")}catch(e){}if(__l!=="tr"&&__l!=="de"&&__l!=="en"){var __a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""];__l="en";for(var __i=0;__i<__a.length;__i++){var __p=String(__a[__i]||"").slice(0,2).toLowerCase();if(__p==="tr"||__p==="de"||__p==="en"){__l=__p;break}}}document.documentElement.setAttribute("lang",__l)}catch(e){document.documentElement.setAttribute("lang","en")}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div id="app" class="site" data-page="post">
+  <a class="skip" href="#main">İçeriğe geç</a>
+  <header class="top">
+    <div class="wrap">
+      <div class="row1">
+        <div>
+          <h1><a class="brand" href="../index.html" translate="no"><span class="mono" aria-hidden="true">VA</span>Volkan Arslan</a></h1>
+        </div>
+        <div class="hdrR">
+          <div class="themebox langbox" translate="no">
+            <button type="button" class="themebtn langbtn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Language / Dil: English">EN</button>
+            <div class="thememenu langmenu" id="langMenu" role="radiogroup" aria-label="Language / Dil" hidden>
+              <button type="button" role="radio" aria-checked="true" data-lang-opt="en" lang="en">English</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="de" lang="de">Deutsch</button>
+              <button type="button" role="radio" aria-checked="false" data-lang-opt="tr" lang="tr">Türkçe</button>
+            </div>
+          </div>
+          <div class="themebox">
+            <button type="button" class="themebtn" id="themeBtn" aria-haspopup="true" aria-expanded="false" aria-controls="themePop" aria-label="Tema: Sistem"><span id="themeIco" aria-hidden="true"></span></button>
+            <div class="thememenu" id="themePop" hidden>
+              <div id="themeMenu" role="radiogroup" aria-label="Tema">
+                <button type="button" role="radio" aria-checked="true" data-theme-opt="system">Sistem</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="light">Açık</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="dark">Koyu</button>
+                <button type="button" role="radio" aria-checked="false" data-theme-opt="holiday">Yılbaşı<span class="seas" hidden> (sezon: otomatik)</span></button>
+              </div>
+              <div id="holMenuX" class="thx" hidden>
+                <button type="button" id="holRunBtn" aria-pressed="true">Karı durdur</button>
+                <button type="button" id="holSetBtn" aria-haspopup="dialog">Yılbaşı efektleri…</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="tabs sitenav" aria-label="Site">
+        <a href="../index.html" data-nav="home">Yazılar</a>
+        <a href="../tools.html" data-nav="tools"><span class="tm">Araçlar</span><span class="td">Hesaplama araçları</span></a>
+        <a href="../about.html" data-nav="about">Hakkımda</a>
+        <a href="../license.html" data-nav="license">Lisans</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap site-main" id="main">
+    <div role="tabpanel" id="sitePane" aria-label="İçerik">
+    <div class="site-stack">
+      <article class="card post" aria-labelledby="postTitle">
+        <p class="post-back"><a href="../index.html">← Tüm yazılar</a></p>
+        <p class="pc-meta"><span class="tag">Opto-mekanik</span> <span class="tag">Malzeme verisi</span> <span class="tag">Hesaplama araçları</span> <span class="pc-date">Kasım 2026</span></p>
+        <h2 class="post-title" id="postTitle">Yuvanın genleşme katsayısı da sabit değil</h2>
+
+        <h3>Önceki yazının devamı</h3>
+
+        <p>Bir önceki yazıda camın genleşme katsayısının sıcaklıkla değiştiğini ve bunun bağ kalınlığını nasıl etkilediğini anlatmıştım. O yazının sonunda yuvanın ve yapıştırıcının hâlâ tek bir α ile hesaplandığını yazmıştım. v3.0 ile bu sınır kalktı. Ama yuva verisini toplarken daha temel bir soruyla karşılaştım: aynı metal için kaynaklar neden farklı α veriyor?</p>
+
+        <figure class="post-fig"><img src="../assets/yuva-alfa-t.svg" alt="Al 7075, paslanmaz 304, Ti-6Al-4V ve Invar 36 için yerel α, −250 ile 200 °C arası. Çizgiler araçtaki α(T) tabloları, halkalar ASM uzama tablolarından hesaplanan aralık eğimleri; gölgeli bölge −50 ile +120 °C. α ×10⁻⁶/K." loading="lazy"><figcaption>Al 7075, paslanmaz 304, Ti-6Al-4V ve Invar 36 için yerel α, −250 ile 200 °C arası. Çizgiler araçtaki α(T) tabloları, halkalar ASM uzama tablolarından hesaplanan aralık eğimleri; gölgeli bölge −50 ile +120 °C. α ×10⁻⁶/K.</figcaption></figure>
+
+        <h3>Paslanmaz 304 için dört farklı α</h3>
+
+        <ul>
+          <li>Kasunic (Optomechanical Systems Engineering, Tablo 8.1): 14.7 ×10⁻⁶/K, −30 ile 70 °C arasındaki ortalama.</li>
+
+          <li>NIST kriyojenik malzeme veritabanı: 20 °C'de yaklaşık 15.4 (eğri uydurması, ±%5).</li>
+
+          <li>Üretici bülteni: 16.9, 0 ile 100 °C arasındaki ortalama.</li>
+
+          <li>Sık kullanılan veri derleyicileri: 17.3, yine 0 ile 100 °C.</li>
+
+        </ul>
+        <p>Farkın bir kısmı aralıktan geliyor. Metallerde α sıcaklıkla artar; 0 ile 100 °C arasındaki ortalama, −30 ile 70 °C arasındaki ortalamadan doğal olarak büyüktür. Bir kısmı ise tanımdan: kimi kaynak belirli bir sıcaklıktaki anlık α'yı, kimi bir aralığın ortalamasını verir ve bu çoğu zaman yazılmaz. Geri kalanı da verinin kendisinden.</p>
+
+        <p>Hangisinin doğru olduğunu ayırmak için CINDAS'ın (Purdue Üniversitesi) eleştirel değerlendirme raporuna baktım. Bu raporlar literatürdeki ölçümleri toplayıp karşılaştırarak önerilen değerler veriyor. 304 için 20 °C'deki anlık α 14.71; Kasunic'in 14.7'siyle aynı. Yani kitaptaki değer düşük değil, aralığı ve kaynağı belli bir değer.</p>
+
+        <h3>Tabloları nasıl kurdum?</h3>
+
+        <p>Tek bir kaynak bir metalin bütün sıcaklık aralığını nadiren kapsıyor. Kriyojenik ölçümler genellikle oda sıcaklığında biter, üretici verileri ise oda sıcaklığından başlayan aralık ortalamalarıdır. Bu yüzden her tablo birkaç kaynaktan kuruluyor:</p>
+
+        <ul>
+          <li>20 °C altında ASM Materials at Low Temperatures'ın uzama tabloları (4–293 K): Ti-6Al-4V, Al 2024 ve 7075, 304L, bakır ve Fe-36Ni (Invar). Ortak aralıkta NIST ve CINDAS ile çoğunlukla %1–5 içinde uyuşuyorlar. Bu tabloların olmadığı metallerde NIST ya da CINDAS kullanılıyor.</li>
+
+          <li>20 °C üstünde el kitabı ve üretici verileri: alüminyumlar için ASM Handbook, bakır alaşımları için CDA, Ti-6Al-4V için Aerospace Metals, Invar için Matthey ve Rolled Alloys.</li>
+
+          <li>Kaynaklar α düzeyinde değil uzama düzeyinde birleşiyor: sınır sıcaklığında iki kaynağın uzaması eşitleniyor, α da uzama eğrisinin eğimi olarak hesaplanıyor.</li>
+
+          <li>Uzama tabloları yuvarlanmış olduğu için (ASM'de ±5 ppm) eğri noktaların tam içinden geçmiyor; noktaların tam içinden geçen bir eğri yuvarlamayı da izler ve α'da gerçek olmayan dalgalar oluşturur. Metallerin çoğunda eğri, Grüneisen–Debye modeli uydurularak kuruluyor; model veriyi her kaynağın belirsizliği içinde karşılamazsa α'nın pencere içinde azalmamasını şart koşan düzgünleştirme kullanılıyor. Invar'da veri olduğu gibi düzgünleştiriliyor. Ayrıntısı "Genleşme eğrisini fizikle düzgünleştirmek" yazısında.</li>
+
+        </ul>
+        <p>Kaynakları basitçe uç uca eklemek yanıltıcı olabilir. Ti-6Al-4V için NIST eğrisi 20 °C'de 7.7 civarında bitiyor; bir üretici 0–100 °C için ortalama 9.0 veriyor. İkisini 20 °C'de birleştirince bu ortalama 20–100 °C aralığına sıkışıyor ve α 20 °C'de 7.9'dan 9.3'e sıçrıyor. Metalde böyle bir sıçrama yok. Ayrıca 9.0, oda sıcaklığındaki ölçümlerle de uyuşmuyor; bu yüzden 20 °C üstünde 20–100 °C ortalaması 8.6 olan veriyi seçtim. Bu değer Kasunic'in 8.6'sıyla aynı.</p>
+
+        <h3>Invar: oda sıcaklığında en düşük</h3>
+
+        <p>Invar en zor malzemeydi. Kaynaklar birbirinden %30'a kadar ayrılıyor; Invar'ın α'sı üretime ve ısıl işleme göre değiştiği için bu şaşırtıcı değil. Tabloda α −100 °C civarında yaklaşık 2.0, 60 °C civarında 1.3 ile en düşük ve 100 °C'nin üstünde Curie noktasına yaklaştıkça hızla artıyor. −190 °C'nin altında ise uzama neredeyse duruyor; 20–40 K arasında hafifçe negatif bile.</p>
+
+        <p>Bir uyarı: üretici veri sayfaları genellikle 20 °C'den belirtilen sıcaklığa kadar olan ortalamayı verir. Aracın α(T) penceresi ise her 10 °C'lik dilimin yerel değerini gösteriyor. Rolled Alloys 20–300 °C için ortalama 5.6 veriyor; tabloda yerel değer 300 °C'ye yaklaşırken 14–15'e çıkıyor ve ikisi aynı uzamayı anlatıyor.</p>
+
+        <h3>Bağ kalınlığına etkisi</h3>
+
+        <p>Örnek: N-BK7 lens, Masterbond 2LO, paslanmaz 304 yuva, 6 × Ø2 mm pad, kür 65 °C, çalışma −50 / +120 °C. N-BK7 için araçta α(T) tablosu yok; bu yüzden farkın tamamı yuvadan geliyor. Önerilen bağ kalınlığı:</p>
+
+        <div class="post-table"><table>
+          <thead><tr><th>Yuva α'sı</th><th>Önerilen h</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">α(T) tablosu (CINDAS; uçlarda 14.53 / 15.93)</th><td>0.345 mm</td></tr>
+            <tr><th scope="row">14.7 (Kasunic, −30~70 °C)</th><td>0.330 mm</td></tr>
+            <tr><th scope="row">15.4 (NIST, 20 °C)</th><td>0.368 mm</td></tr>
+            <tr><th scope="row">16.9 (bülten, 0–100 °C)</th><td>0.453 mm</td></tr>
+            <tr><th scope="row">17.3 (derleyici, 0–100 °C)</th><td>0.478 mm</td></tr>
+          </tbody>
+        </table></div>
+
+        <figure class="post-fig"><img src="../assets/yuva-alfa-t-304.svg" alt="Paslanmaz 304'ün anlık α'sı (mavi, CINDAS Report 51), kür 65 °C ve −50 / +120 °C uçları, kürden her uca sekant α (kırmızı); kesikli çizgiler 14.7 (Kasunic) ve 16.9 (0–100 °C bülteni). α ×10⁻⁶/K." loading="lazy"><figcaption>Paslanmaz 304'ün anlık α'sı (mavi, CINDAS Report 51), kür 65 °C ve −50 / +120 °C uçları, kürden her uca sekant α (kırmızı); kesikli çizgiler 14.7 (Kasunic) ve 16.9 (0–100 °C bülteni). α ×10⁻⁶/K.</figcaption></figure>
+
+        <p>Kaynak seçimi bağ kalınlığını yaklaşık %45 değiştiriyor. Bu örnekte cam ile yuva arasındaki α farkı küçük, yapıştırıcının α'sı ise büyük; bu durumda yuva α'sındaki küçük bir oynama bağ kalınlığına güçlü biçimde yansıyor. Sıcaklığa bağlı tablo, soğuk uçta biraz daha küçük, sıcak uçta biraz daha büyük α kullanarak iki ucu birlikte dengeliyor.</p>
+
+        <h3>Araçta ne değişti?</h3>
+
+        <p>Hesap artık optik, yuva ve yapıştırıcının üçü için de kürden soğuk uca ve sıcak uca ayrı sekant α kullanabiliyor. Bir malzemenin tablosu yoksa o malzeme eskisi gibi tek α ile hesaplanıyor. Bir malzemenin α'sını Girdiler'de elle girerseniz o malzemenin tablosu kullanılmıyor.</p>
+
+        <ul>
+          <li>21 yuva malzemesinde kaynaklı α(T) tablosu var; çoğu −269 °C'ye kadar iniyor.</li>
+
+          <li>Yeni paslanmazlar: 304L, 317, 321, 347, 410 ve 430.</li>
+
+          <li>α(T) tablosu olan her yuva malzemesinde listedeki CTE, tablonun −30~70 °C ortalamasıdır; hesap ise kürden soğuk ve sıcak uca tablodan bulunan sekant α'larla yapılır ve bu iki değer malzeme satırının altında yazar.</li>
+
+          <li>Yapıştırıcı için de α(T) verisi girilebiliyor. Hazır veri yok: incelediğim yapıştırıcı veri sayfalarının hiçbirinde sıcaklığa bağlı CTE verilmiyor.</li>
+
+          <li>α(T) verisi artık .xlsx ya da .csv dosyasından alınabiliyor; dosya tarayıcıda okunuyor, hiçbir yere gönderilmiyor.</li>
+
+          <li>Optik sistemlerde yaygın kullanılan yuva metalleri "Optikte yaygın" etiketiyle işaretli; yuva listesini bu etikete göre süzebiliyorsunuz.</li>
+
+          <li>Yazdırılan rapor sadeleşti: grafik açıklamaları ve geçen kontrollerin ayrıntıları kâğıtta yok, ekranda duruyor.</li>
+
+        </ul>
+        <h3>Sınırlar</h3>
+
+        <p>316, 317, 321, 347, 410 ve 430 tabloları yalnız −73 ile 127 °C arasını kapsıyor (CINDAS); dışında araç uçtaki α ile devam ediyor ve uyarı veriyor. 304, 303 ve 304L −73 °C altında ASM verisiyle tamamlandı. Invar tablosu belirli bir lotu değil, kaynakların uzlaştığı eğriyi gösteriyor; kritik bir tasarımda kendi malzemenizin ölçümünü girin. Titanyum Grade 2 için sıcaklığa bağlı veri bulamadım; tek α ile kalıyor. Yapıştırıcılarda asıl büyük değişim camsı geçiş sıcaklığının (Tg) üstünde ve bunun için hâlâ üreticiden veri gerekiyor.</p>
+
+        <h3>Kaynaklar</h3>
+
+        <ul>
+          <li>K. J. Kasunic, Optomechanical Systems Engineering, Wiley, 2015, Tablo 8.1 ve 10.1.</li>
+
+          <li>P. D. Desai, C. Y. Ho, Thermal Linear Expansion of Nine Selected AISI Stainless Steels, CINDAS Report 51, 1978.</li>
+
+          <li>Y. S. Touloukian, C. Y. Ho (ed.), Thermophysical Properties of Selected Aerospace Materials, Part II, CINDAS.</li>
+
+          <li>Materials at Low Temperatures, American Society for Metals, Ohio (ISBN 0-87170-146-4); 4–293 K uzama tabloları.</li>
+
+          <li>NIST Cryogenic Material Properties (304, 6061-T6, Ti-6Al-4V, Invar, berilyum, bakır).</li>
+
+          <li>ASM Handbook, Cilt 2 (alüminyum alaşımlarının ısıl genleşmesi).</li>
+
+          <li>Aerospace Metals, Titanium Ti-6Al-4V (Grade 5), Annealed veri sayfası; Matthey, FeNi36 Invar veri sayfası; Rolled Alloys, INVAR 36 veri sayfası.</li>
+
+        </ul>
+      </article>
+    </div>
+    </div>
+  </main>
+  <footer class="wrap">
+    <p><span translate="no">© 2026 Volkan Arslan</span> · <a href="../license.html">Lisans</a> · <a href="https://www.linkedin.com/in/arslanvolkan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="#" class="site-mail">e-posta</a></p>
+    <p>Temayı sağ üstteki menüden değiştirebilirsiniz. Yılbaşı temasında kar topu, kardan adam, süsler ve iki kedi var.</p>
+  </footer>
+</div>
+<script src="../assets/i18n/yuva-alfa-t.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
