@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Genleşme eğrisini fizikle düzgünleştirmek — Volkan Arslan</title>
-<meta name="description" content="The false dip in the α(T) curve of titanium, the Grüneisen–Debye model, what happens when the model does not fit the data, why Invar is left out and why polynomials are not enough.">
+<meta name="description" content="The false dip in the α(T) curve of titanium, the Grüneisen–Debye model, what happens when the model does not fit the data, why Invar is left out, why polynomials are not enough, and an α(T) curve fitting tool you can use on your own data.">
 <meta name="author" content="Volkan Arslan">
 <meta property="og:title" content="Genleşme eğrisini fizikle düzgünleştirmek — Volkan Arslan">
-<meta property="og:description" content="The false dip in the α(T) curve of titanium, the Grüneisen–Debye model, what happens when the model does not fit the data, why Invar is left out and why polynomials are not enough.">
+<meta property="og:description" content="The false dip in the α(T) curve of titanium, the Grüneisen–Debye model, what happens when the model does not fit the data, why Invar is left out, why polynomials are not enough, and an α(T) curve fitting tool you can use on your own data.">
 <meta property="og:type" content="article">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5b88'/%3E%3Ctext x='16' y='21.5' font-family='Arial,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
 <script>try{var __q=new URLSearchParams(location.search),__qt=__q.get("t"),__ql=__q.get("l");if(__qt&&/^(system|light|dark|holiday)$/.test(__qt))localStorage.setItem("va-site-tema",__qt);if(__ql&&/^(en|tr|de)$/.test(__ql))localStorage.setItem("athermal-bag-hesabi-v14-dil",__ql);if(__qt||__ql){__q.delete("t");__q.delete("l");var __s=__q.toString();history.replaceState(null,"",location.pathname+(__s?"?"+__s:"")+location.hash)}}catch(e){}</script>
@@ -91,6 +91,8 @@
 
           <li>Model bir malzemeye ancak veriyi karşılıyorsa uygulanıyor: her noktada yuvarlama payına ek olarak %2 ölçüm belirsizliği varsayıldığında χ²/N en fazla 3 olmalı ve α pencere içinde azalmamalı. %2 benim seçimim; CINDAS'ın önerilen değerler için verdiği ±%5 belirsizliğin altında kalacak biçimde seçtim.</li>
 
+          <li>Model 0 K yakınında küçük eksi α verebiliyor (Ti-6Al-4V'de −260 °C'de −0.33); verideki uzama orada düz. Bu eksi kısım sıfıra kırpılıyor ve yalnız −240 °C'nin altını etkiliyor. Kırpma veriyle sınanıyor: veri gerçekten eksi α gösteriyorsa (Invar'ın 20–40 K'de yaptığı gibi) kırpılmıyor ve bu raporda yazıyor. Elektron terimini B ≥ 0 ile sınırlamayı da denedim: kriyojenik ucu düzeltti ama oda sıcaklığındaki α'yı kaydırdı (Ti 20 °C'de 8.49'dan 8.70'e) ve veriye uyumu bozdu, bu yüzden bıraktım.</li>
+
           <li>Model reddedilirse (SS 410 ve berilyum bakırda oldu) eski düzgünleştirme "α azalamaz" kısıtıyla birlikte kullanılıyor. Invar'a model hiç uygulanmıyor.</li>
 
         </ul>
@@ -120,9 +122,10 @@
           <li>NIST'in kendisi de 2000 tarihli veritabanı makalesinde, uzama için verilen denklemlerin türevi alınarak α'nın iyi elde edilemeyeceğini belirtiyor.</li>
 
         </ul>
-        <h3>Ayrı bir hesaplama aracı geliyor</h3>
+        <h3>α(T) eğri oturtma aracı</h3>
 
-        <p>Bu düzgünleştirmeyi Athermal Bağ Hesabı'nın içinde gömülü bırakmak istemiyorum. İleride ayrı bir hesaplama aracı olarak yayımlayacağım: kendi uzama ya da α verinizi .xlsx veya .csv olarak yüklüyorsunuz, araç Grüneisen–Debye modelini ve kısıtlı düzgünleştirmeyi uyguluyor, modelin veriyi karşılayıp karşılamadığını χ² ile gösteriyor ve sonucu Athermal Bağ Hesabı'na doğrudan alınabilecek bir α(T) tablosu olarak veriyor. Hangi sıcaklık penceresinde hangi kısıtın uygulanacağı ve modelin kullanılıp kullanılmayacağı sizde kalacak; Invar gibi kuralı bozan malzemeler için bu seçim gerekli.</p>
+        <p>Bu düzgünleştirmeyi Athermal Bağ Hesabı'nın içinde gömülü bırakmak istemedim; ayrı bir hesaplama aracı olarak yayımladım. Kendi uzama ya da α verinizi yapıştırıyor veya .xlsx ya da .csv olarak yüklüyorsunuz; birden çok kaynak uzama düzeyinde birleştiriliyor. Araç Grüneisen–Debye modelini ve kısıtlı düzgünleştirmeyi uyguluyor, modelin veriyi karşılayıp karşılamadığını χ² ve artık grafiğiyle gösteriyor ve sonucu Athermal Bağ Hesabı'na doğrudan alınabilecek bir α(T) tablosu olarak veriyor. Hangi sıcaklık penceresinde hangi kısıtın uygulanacağı ve modelin kullanılıp kullanılmayacağı sizde; Invar gibi kuralı bozan malzemeler için bu seçim gerekli. Ti-6Al-4V ve Invar 36 örnekleri araçta hazır.</p>
+        <div class="btnrow"><a class="btn pri" href="../tools/alfa-egri/index.html">Aracı aç</a><a class="btn" href="../tools.html">Hesaplama araçları</a></div>
 
         <h3>Kaynaklar</h3>
 
