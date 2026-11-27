@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="'Times New Roman',Times,serif">
+<rect width="800" height="460" rx="14" fill="#fff"/>
+<rect x="224.0" y="60" width="455.6" height="320" fill="#eef3f8"/>
+<line x1="90" y1="348.0" x2="760" y2="348.0" stroke="#e1e6ea"/>
+<text x="80" y="354.0" font-size="18" text-anchor="end" fill="#333">13</text>
+<line x1="90" y1="284.0" x2="760" y2="284.0" stroke="#e1e6ea"/>
+<text x="80" y="290.0" font-size="18" text-anchor="end" fill="#333">14</text>
+<line x1="90" y1="220.0" x2="760" y2="220.0" stroke="#e1e6ea"/>
+<text x="80" y="226.0" font-size="18" text-anchor="end" fill="#333">15</text>
+<line x1="90" y1="156.0" x2="760" y2="156.0" stroke="#e1e6ea"/>
+<text x="80" y="162.0" font-size="18" text-anchor="end" fill="#333">16</text>
+<line x1="90" y1="92.0" x2="760" y2="92.0" stroke="#e1e6ea"/>
+<text x="80" y="98.0" font-size="18" text-anchor="end" fill="#333">17</text>
+<line x1="90.0" y1="380" x2="90.0" y2="386" stroke="#333"/>
+<text x="90.0" y="408" font-size="18" text-anchor="middle" fill="#333">−100</text>
+<line x1="224.0" y1="380" x2="224.0" y2="386" stroke="#333"/>
+<text x="224.0" y="408" font-size="18" text-anchor="middle" fill="#333">−50</text>
+<line x1="358.0" y1="380" x2="358.0" y2="386" stroke="#333"/>
+<text x="358.0" y="408" font-size="18" text-anchor="middle" fill="#333">0</text>
+<line x1="492.0" y1="380" x2="492.0" y2="386" stroke="#333"/>
+<text x="492.0" y="408" font-size="18" text-anchor="middle" fill="#333">50</text>
+<line x1="626.0" y1="380" x2="626.0" y2="386" stroke="#333"/>
+<text x="626.0" y="408" font-size="18" text-anchor="middle" fill="#333">100</text>
+<line x1="760.0" y1="380" x2="760.0" y2="386" stroke="#333"/>
+<text x="760.0" y="408" font-size="18" text-anchor="middle" fill="#333">150</text>
+<polyline points="162.0,333.9 296.0,280.8 357.6,259.7 411.2,238.6 430.0,226.4 564.0,181.6 698.0,138.7" fill="none" stroke="#1d4f91" stroke-width="2.6"/>
+<circle cx="162.0" cy="333.9" r="3.5" fill="#1d4f91"/>
+<circle cx="296.0" cy="280.8" r="3.5" fill="#1d4f91"/>
+<circle cx="357.6" cy="259.7" r="3.5" fill="#1d4f91"/>
+<circle cx="411.2" cy="238.6" r="3.5" fill="#1d4f91"/>
+<circle cx="430.0" cy="226.4" r="3.5" fill="#1d4f91"/>
+<circle cx="564.0" cy="181.6" r="3.5" fill="#1d4f91"/>
+<circle cx="698.0" cy="138.7" r="3.5" fill="#1d4f91"/>
+<line x1="90" y1="239.2" x2="760" y2="239.2" stroke="#8a95a1" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="100" y="232.2" font-size="19" text-anchor="start" fill="#5c6670">14.7</text>
+<line x1="90" y1="98.4" x2="760" y2="98.4" stroke="#8a95a1" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="100" y="91.4" font-size="19" text-anchor="start" fill="#5c6670">16.9</text>
+<line x1="224.0" y1="251.4" x2="532.2" y2="251.4" stroke="#d7262b" stroke-width="4"/>
+<line x1="532.2" y1="161.8" x2="679.6" y2="161.8" stroke="#d7262b" stroke-width="4"/>
+<text x="378.1" y="277.4" font-size="19" text-anchor="middle" fill="#d7262b">14.53</text>
+<text x="605.9" y="149.8" font-size="19" text-anchor="middle" fill="#d7262b">15.93</text>
+<line x1="224.0" y1="60" x2="224.0" y2="380" stroke="#1b1b1b" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="224.0" y="48" font-size="22" font-style="italic" text-anchor="middle" fill="#111">T<tspan font-size="14" dy="5">min</tspan></text>
+<line x1="532.2" y1="60" x2="532.2" y2="380" stroke="#1b1b1b" stroke-width="1.6"/>
+<text x="532.2" y="48" font-size="22" font-style="italic" text-anchor="middle" fill="#111">T<tspan font-size="14" dy="5">c</tspan></text>
+<line x1="679.6" y1="60" x2="679.6" y2="380" stroke="#1b1b1b" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="679.6" y="48" font-size="22" font-style="italic" text-anchor="middle" fill="#111">T<tspan font-size="14" dy="5">max</tspan></text>
+<text x="425.0" y="446" font-size="21" text-anchor="middle" fill="#111"><tspan font-style="italic">T</tspan> (°C)</text>
+<text x="28" y="220.0" font-size="21" text-anchor="middle" fill="#111" transform="rotate(-90 28 220.0)"><tspan font-style="italic">α</tspan> (10<tspan font-size="14" dy="-8">−6</tspan><tspan dy="8">/K)</tspan></text>
+</svg>

@@ -717,10 +717,21 @@ svg .ub-q{stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:3 3}
 .ucard .ubest table{margin:6px 0}.ucard .warnx{color:var(--warn)}
 /* v2.9 yazdırma sıkıştırma: büyük kartlar bölünebilir (boş sayfa kalmasın), küçük parçalar bölünmez; çizimler yan yana ve küçük; denetimler basılmaz */
 @media print{
-  @page{size:A4;margin:11mm 12mm}
+  @page{size:A4;margin:9mm 10mm}   /* v2.10: 11×12 → 9×10 mm (sayfa sayısı) */
   body{font-size:9pt;line-height:1.32}
   #results h2{font-size:11pt;margin:0 0 4px}
   #results section.card{break-inside:auto !important;padding:7px 9px;margin:0 0 6px;border-radius:4px}
+  #results .card,#results .gcard,#results details.xp,#results details.xp2{break-inside:auto !important}   /* v2.10: section olmayan büyük kartlar (Ne yapmalı, Grafikler, Ayrıntılar) da bölünebilir; yarım sayfa boşluk kalmasın */
+  #results .gcard{padding:6px 8px;margin:0 0 6px}
+  .gcard .cw svg,.gcard .plotsvg{break-inside:avoid}
+  #results .gwrap,#results .gwrap>div,#results .gcard .cw,#results .recs>li{break-inside:auto !important}   /* v2.10: büyük gruplar bölünebilir; çizimin kendisi bölünmez */
+  .gcard svg{max-height:5.6cm !important}
+  .gcard .cw[data-k="stress"] svg,.gcard .cw[data-k="bar"] svg{max-height:4.8cm !important}
+  .gwrap svg{max-height:5.2cm !important}
+  .ucard .ubar svg{max-height:3.4cm !important}
+  #results .recs{display:block !important}   /* ızgara yerine akış: Chrome basımda ızgara satırlarını bölmekte zorlanıyor */
+  #results .recs>li{margin:0 0 4px}
+  #results h2.small:has(+ details.xp):not(:has(~ details.xp[open])){display:none}   /* v2.10: ayrıntıların hepsi kapalıysa "AYRINTILAR" başlığı tek başına sayfa açmasın */
   #results .verdict .big{font-size:14pt}
   .dash>li,.recs>li,.ubest,.gwrap>div,.ct,.unc-t,.pin,.plotsvg,.draw,.thnote,.legend{break-inside:avoid}
   #results h2,#results h3,.uh,h2.small{break-after:avoid}
@@ -739,6 +750,28 @@ svg .ub-q{stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:3 3}
   .pin2 .pin{width:100%;font-size:8.2pt}
   .pin th,.pin td{padding:1px 4px}
   footer.wrap{font-size:8pt;margin-top:6px;padding-top:4px;break-before:avoid}
+  footer.wrap{display:none !important}   /* v2.10: içeriği #printFoot ile 1. sayfada */
+  #printFoot{margin:0 0 6px}
+  /* v2.10 (kullanıcı, 2026-11-26): basımdan çıkarılanlar (ekranda kalır) */
+  #app{padding-bottom:0 !important} main.wrap{padding-bottom:0 !important;margin-bottom:0 !important}   /* telefon mini şerit boşluğu basımda boş son sayfa açmasın */
+  #uncCard{display:none !important}
+  #results section.card:has(> details.how:only-child){display:none !important}
+  /* v2.10 (kullanıcı): hedef 2 sayfa (tek yaprak, arkalı önlü). Gerilme ve bar grafiği yan yana; lejant ve tablolar sıkı */
+  /* v3.0 (kullanıcı, 2026-11-26): baskıda grafik lejantı/not satırları ve GEÇTİ/BİLGİ maddelerinin ayrıntısı yok (ekranda kalır) */
+  #results .gcard .legend,#results details.lgd,#results .gcard .note-line{display:none !important}
+  .dash>li:has(>details>summary .chip.s-ok)>details>summary .val,.dash>li:has(>details>summary .chip.s-info)>details>summary .val,.dash>li:has(>details>summary .chip.s-ok)>details>summary .ineq,.dash>li:has(>details>summary .chip.s-ok)>:not(details),.dash>li:has(>details>summary .chip.s-info)>:not(details){display:none !important}
+  #results .resRest{display:grid !important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:8px;align-items:start}
+  #results .resRest>*{grid-column:1 / -1;min-width:0}
+  #results .resRest>section.gcard:has(.cw[data-k="stress"]),#results .resRest>section.gcard:has(.cw[data-k="bar"]){grid-column:auto}
+  .gcard .cw[data-k="stress"] svg,.gcard .cw[data-k="bar"] svg{max-height:4.6cm !important}
+  .gcard .legend,details.lgd .legend{font-size:7.4pt;line-height:1.25}
+  .gwrap svg{max-height:4.8cm !important}
+  .pin2 .pin{font-size:7.6pt !important}
+  .pin th,.pin td{padding:0 3px !important;line-height:1.2}
+  #results .recs>li{font-size:8.2pt;margin:0 0 2px}
+  body{font-size:8.6pt;line-height:1.28}   /* yalnız kapalı "nasıl" ayrıntısı olan kap (tornado) basımda boş çerçeve bırakmasın */   /* belirsizlik bandı, Tg üstü senaryo, dayanıklı h tabloları */
+  .dash>li details>.more{display:none !important}   /* pano yük durumu tabloları ve madde notları; madde satırı ve sonuç kalır */
+  .recs details.more2{display:none !important}   /* "Ne yapmalı" uzun açıklamaları; başlık ve kalın ilk cümle kalır */
 }
 @media print{.pin2 .pin{table-layout:fixed}.pin2 .pin th:first-child{width:46%}.pin2 .pin thead th:nth-child(2){width:38%}.pin2 .pin th,.pin2 .pin td{overflow-wrap:anywhere;word-break:normal;white-space:normal!important}.pin2 .pin td:last-child{white-space:nowrap}.pin2 .pin .gasrow td{white-space:normal}}
 
@@ -863,6 +896,17 @@ dialog.prtdlg{width:min(calc(100vw - 16px),440px)}
 .prtdlg .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 #printTitle{margin:0 0 4px;font-size:20pt;line-height:1.2;overflow-wrap:anywhere}
 @media print{html.pt-on .top h1{display:none}}
+.meta.unitw{color:var(--info)}.meta.unitw[hidden]{display:none}
+.meta.adhw[hidden]{display:none}
+/* UX 5.2.2: Veri tablosu satır menüsü */
+.uactm>summary{list-style:none;display:inline-flex;align-items:center;cursor:pointer;white-space:nowrap}
+.uactm>summary::-webkit-details-marker{display:none}
+.uactm .uactl{display:flex;flex-direction:column;align-items:stretch;gap:4px;margin-top:4px}
+.uactm .uactl .btn{margin:0}
+#adhLoadSt .ubadge{font-size:11px;font-weight:600;vertical-align:2px;margin-left:6px}.ubadge.same{color:var(--ok);background:var(--ok-bg);border:1px solid transparent;border-radius:9px;padding:0 7px}
+.scnpeek{font-size:12px;background:var(--surface2);border:1px solid var(--line);border-radius:4px;padding:0 4px;overflow-wrap:anywhere}
+.atfile{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:6px 0 2px}.atfile .atsheet{display:inline-flex;gap:6px;align-items:center;margin:0}
+.utagf .tagf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 8px}.utagf .tagf .lab{font-size:13px;color:var(--ink2)}.sftag{display:inline-flex;gap:6px;align-items:center;margin:4px 0 0;font-size:13px}
 
 /* ---- Kişisel site: uygulama style.css'inin üstüne (tema değişkenleri, kartlar, başlık, tema menüsü, yılbaşı kapakları ortak) ---- */
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr, 100px) + 12px)}
