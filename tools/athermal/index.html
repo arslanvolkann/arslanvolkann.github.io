@@ -6371,29 +6371,43 @@ window.AthHoliday = (function () {
       return /^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(s) ? Number(s) : NaN;
     }
     // ---- ayrıştırma: metin → satırlar ----
+    // v3.0 (kullanıcı onayı 2026-11-27; eğri aracı QA K2 ile aynı): virgül sütun ayırıcı olabilir, tırnaklı CSV alanları, sayısal olmayan satırlar yalnız İLK veri
+    // satırından önce atlanır (sonrakiler "Sayı olarak okunamadı" satır hatasıdır), atlanan satırlar raporlanır (skipped, skippedFirst). Eğri aracı aynı dosyayı kullanır.
+    function cellsOf(raw, want) {   // satırı hücrelere böl: önce sekme/noktalı virgül; yoksa boşluk ya da virgül (beklenen sütun sayısına uyan, tümü sayı olan seçilir)
+      var unq = function (c) { var t = c.trim(); return t.length >= 2 && t.charAt(0) === '"' && t.charAt(t.length - 1) === '"' ? t.slice(1, -1).replace(/""/g, '"') : c; };
+      var rng = function (cs) { var cx = []; cs.forEach(function (c) { var m = /^\s*([-+]?[\d.,]+(?:[eE][-+]?\d+)?)[~…]([-+]?[\d.,]+(?:[eE][-+]?\d+)?)\s*$/.exec(c); if (m) cx.push(m[1], m[2]); else cx.push(c); }); while (cx.length && cx[cx.length - 1].trim() === "") cx.pop(); return cx; };   // aralık yazımı: −30~70 → iki sütun
+      if (/[\t;]/.test(raw)) return rng(raw.split(/[\t;]/).map(unq));
+      var cand = [rng(raw.trim().split(/\s+/).map(unq))];
+      if (raw.indexOf(",") >= 0) cand.push(rng(raw.split(",").map(function (c) { return unq(c).trim(); }).filter(function (c, k, all) { return c !== "" || k < all.length - 1; })));
+      var allNum = function (cs) { return cs.length && cs.every(function (c) { return !isNaN(numTok(c)); }); };
+      for (var k = 0; k < cand.length; k++) if (allNum(cand[k]) && (want === null || want.indexOf(cand[k].length) >= 0)) return cand[k];
+      for (k = 0; k < cand.length; k++) if (allNum(cand[k])) return cand[k];
+      return cand[0];
+    }
     function parse(text, fmt) {
       var lines = String(text === undefined || text === null ? "" : text).replace(/\r/g, "").split("\n");
-      var rows = [], errs = [], lineOf = [], skipped = 0, ncol = null, i, k;
+      var rows = [], errs = [], lineOf = [], rawC = [], skipped = 0, skippedFirst = null, ncol = null, i, k;
       for (i = 0; i < lines.length; i++) {
         var raw = lines[i].replace(/[−–‒]/g, "-");
         if (!raw.trim()) continue;
         raw = raw.replace(/(\d)\s*([~…])\s*(?=[-+.\d])/g, "$1$2");   // "−30 ~ 70" → "−30~70"
-        var cells = /[\t;]/.test(raw) ? raw.split(/[\t;]/) : raw.trim().split(/\s+/), cx = [];
-        cells.forEach(function (c) { var m = /^\s*([-+]?[\d.,]+(?:[eE][-+]?\d+)?)[~…]([-+]?[\d.,]+(?:[eE][-+]?\d+)?)\s*$/.exec(c); if (m) { cx.push(m[1], m[2]); } else cx.push(c); });   // aralık yazımı: −30~70, -30…70 → iki sütun
-        cells = cx;
-        while (cells.length && cells[cells.length - 1].trim() === "") cells.pop();   // Excel'den gelen sondaki boş sütunlar
+        var want = fmt === "int" ? (ncol === null ? [3, 1] : [ncol]) : [2];
+        var cells = cellsOf(raw, want);
         var vals = cells.map(numTok), nn = vals.filter(function (v) { return !isNaN(v); }).length;
-        if (nn === 0) { skipped++; continue; }   // sayısal olmayan başlık satırı
+        if (nn === 0) {
+          if (!rows.length && !errs.length) { skipped++; if (skippedFirst === null) skippedFirst = lines[i].trim().slice(0, 80); continue; }   // ilk veri satırından önceki başlık
+          errs.push({ line: i + 1, row: null, msg: "Sayı olarak okunamadı" }); continue;
+        }
         if (rows.length >= MAXROW) { errs.push({ line: i + 1, row: null, msg: "En çok " + MAXROW + " satır girilebilir" }); break; }
-        var want = fmt === "int" ? (ncol === null ? (cells.length === 1 ? 1 : 3) : ncol) : 2;
-        if (fmt === "int" && ncol === null) ncol = want;
-        if (cells.length !== want) { errs.push({ line: i + 1, row: null, msg: want + " sütun bekleniyordu, " + cells.length + " bulundu" }); continue; }
+        var w = fmt === "int" ? (ncol === null ? (cells.length === 1 ? 1 : 3) : ncol) : 2;
+        if (fmt === "int" && ncol === null) ncol = w;
+        if (cells.length !== w) { errs.push({ line: i + 1, row: null, msg: w + " sütun bekleniyordu, " + cells.length + " bulundu" }); continue; }
         var bad = false;
         for (k = 0; k < vals.length; k++) if (isNaN(vals[k])) bad = true;
         if (bad) { errs.push({ line: i + 1, row: null, msg: "Sayı olarak okunamadı" }); continue; }
-        rows.push(vals); lineOf.push(i + 1);
+        rows.push(vals); lineOf.push(i + 1); rawC.push(cells.map(function (c) { return String(c).trim(); }));
       }
-      return { rows: rows, errs: errs, skipped: skipped, lines: lineOf, single: fmt === "int" && ncol === 1 };
+      return { rows: rows, errs: errs, skipped: skipped, skippedFirst: skippedFirst, lines: lineOf, raw: rawC, single: fmt === "int" && ncol === 1 };   // raw: hücre metinleri (girilen basamak sayısı için)
     }
     // ---- şema denetimi (ham kaynak); dönüş: { errs:[{line,row,msg}], clean } ----
     function check(src) {
